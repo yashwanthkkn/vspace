@@ -14,6 +14,11 @@ public class AdminController {
 	
 	@RequestMapping(value="/test",method = RequestMethod.GET)
 	public String test() {
-		return "AdminDashboard";
+		return "AdminQuestion";
+	}
+	
+	@RequestMapping(value="/result",method = RequestMethod.GET)
+	public String result() {
+		return "AdminResult";
 	}
 }

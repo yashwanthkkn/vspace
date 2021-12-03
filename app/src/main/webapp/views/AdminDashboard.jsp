@@ -48,7 +48,11 @@
             <div class="col-12">
                 <div class="d-flex justify-content-between">
                     <div class="h5">Current Test</div>
-                    <div><button class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Create Test</button></div>
+                    <div>
+                      <button class="btn btn-primary btn-sm" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                        <i class="fas fa-plus"></i> Create Test
+                      </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -68,7 +72,7 @@
                     <tbody>
                       <tr>
                         <td scope="row">
-                          <a href="adminQuestion.html">Kec</a>
+                          <a href="/admin/test">Kec</a>
                         </td>
                         <td>12/12/12</td>
                         <td>12 am</td>
@@ -102,7 +106,7 @@
                     <tbody>
                       <tr>
                         <td scope="row">
-                          <a href="adminHistory.html">RMK</a>
+                          <a href="/admin/result">RMK</a>
                         </td>
                         <td>12/12/12</td>
                         <td>12 am</td>
@@ -116,6 +120,35 @@
         </div>
     </div>
 
+    <!-- MODAL -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+          <h5 id="offcanvasRightLabel">Add Question</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <form>
+                <div class="mb-1">
+                    <label for="testName" class="form-label">Test Name</label>
+                    <input placeholder="Aptitute-Kec" type="text" class="form-control form-control-sm" id="testName" >
+                </div>
+                <div class="mb-1">
+                    <label for="date" class="form-label">Date</label>
+                    <input type="date" class="form-control form-control-sm" id="date" >
+                </div>
+                <div class="mb-1">
+                    <label for="time" class="form-label">Start Time</label>
+                    <input type="time" class="form-control form-control-sm" id="time" >
+                </div>
+                <div class="mb-3">
+                    <label for="duration" class="form-label">Duration</label>
+                    <input placeholder="eg. 1 hr" type="text" class="form-control form-control-sm" id="duration" >
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm px-5">Create Test</button>
+              </form>
+        </div>
+      </div>
+  </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

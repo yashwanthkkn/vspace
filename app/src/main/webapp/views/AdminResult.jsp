@@ -1,0 +1,91 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vspace</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light  px-5">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <!-- <img src="" alt="" width="30" height="24" class="d-inline-block align-text-top"> -->
+                Vspace
+              </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+            </ul>
+            <button class="btn btn-outline-primary btn-sm" type="submit">Logout</button>
+            
+          </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="px-5 mt-4">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item text-primary"><a href="/admin/dashboard" class="decor-none"> Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Result</li>
+          </ol>
+        </nav>
+      </div>
+
+        <div class="row mt-3 px-5">
+            <div class="col-12">
+                <div class="h5">Result</div>
+                <small class="text-secondary">Submissions of Test takers</small>
+            </div>
+        </div>
+
+        <div class="row mt-5 px-5">
+            <div class="col-12">
+                <div class="d-flex justify-content-between">
+                    <div class="h5">Test : <span class="text-primary">KEC</span></div>
+                    <div><button class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download Result</button></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row px-5">
+            <div class="col-12">
+                <table class="table  table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Score</th>
+                        <th scope="col">Rank</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td scope="row">Yash</td>
+                        <td>yash@gmail.com</td>
+                        <td>76</td>
+                        <td>1</td>
+                        <td>3</td>
+                      </tr>
+                     
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+       
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>
