@@ -18,7 +18,7 @@
                 <form class="mt-3" method="POST" action="/login">
                     <div class="form-group">
                         <label for="email">Email id</label>
-                        <input type="email" name="email" id="email" placeholder="Email" class="form-control" required>
+                        <spring:input type="email" name="email" id="email" placeholder="Email" class="form-control" required>
                     </div>
                     <div class="form-group mt-4">
                         <label for="name">Name</label>
