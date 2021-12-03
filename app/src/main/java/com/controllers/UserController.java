@@ -8,7 +8,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("user")
 public class UserController {
 	@RequestMapping(value="/dashboard",method = RequestMethod.GET)
-	public String page() {
-		return "AdminDashboard";
+	public String dashboard() {
+		return "StudentDashboard";
 	}
+	
+	@RequestMapping(value="/test",method = RequestMethod.GET)
+	public String testPage() {
+		return "TestPage";
+	}
+	
 }
