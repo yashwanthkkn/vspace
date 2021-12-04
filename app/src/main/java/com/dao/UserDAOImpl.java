@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.entities.User;
 import com.util.HibernateConfiguration;
 
-@Component("userdao")
+@Repository("userDao")
 public class UserDAOImpl extends AbstractDAO<Integer, User> implements UserDAO{
 
 	@Override
