@@ -2,6 +2,8 @@ package com.dao;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.entities.User;
 import com.util.HibernateConfiguration;
 
-@Component("userdao")
+@Repository
 public class UserDAOImpl extends AbstractDAO<Integer, User> implements UserDAO{
 
 	@Override
