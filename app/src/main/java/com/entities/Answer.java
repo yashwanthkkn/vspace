@@ -12,12 +12,12 @@ public class Answer {
 	private int oid;
 	private int qid;
 	private String options;
-	public  int getOid() {
+/*	public  int getOid() {
 		return oid;
 	}
 	public void setOid(int oid) {
 		this.oid = oid;
-	}
+	}*/
 	public  String getOptions() {
 		return options;
 	}

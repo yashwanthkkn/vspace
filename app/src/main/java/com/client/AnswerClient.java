@@ -31,8 +31,7 @@ public class AnswerClient {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext ctx =  SpringApplication.run(AnswerClient.class, args);
 		Answer ans=new Answer();
-		ans.setOid(1);
-		ans.setOid(3);
+		ans.setQid(3000);
 		ans.setOptions("Correctanswer");
 		AnswerDAO dao = ctx.getBean("AnswerDAO",AnswerDAOImpl.class);
 		dao.saveAnswer(ans);
