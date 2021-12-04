@@ -26,7 +26,7 @@ public class HibernateConfiguration {
 		this.environment = environment;
 	}
 	
-	@Bean
+	@Bean("dataSource")
 	public DataSource getDataSource() {
 		DriverManagerDataSource dataSource=new DriverManagerDataSource();
 		dataSource.setDriverClassName(environment.getRequiredProperty("spring.datasource.driver-class-name"));
@@ -42,11 +42,11 @@ public class HibernateConfiguration {
 		return txManager;
 	}
 	
-	@Bean
+	@Bean("session")
 	public LocalSessionFactoryBean getSessionFactory() {
 		LocalSessionFactoryBean sessionFactory =new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(getDataSource());
-		sessionFactory.setPackagesToScan(new String[] {"com.model"});
+		sessionFactory.setPackagesToScan(new String[] {"com.entities"});
 		sessionFactory.setHibernateProperties(getHibernateProperties());
 		return sessionFactory;
 	}
