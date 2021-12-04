@@ -13,34 +13,34 @@ public class Submissions implements Serializable{
 	private String state;
 	private int mark;
 	private String rightanswer;
-	public final CompKey_Submissions getCompkey() {
+	public CompKey_Submissions getCompkey() {
 		return compkey;
 	}
-	public final void setCompkey(CompKey_Submissions compkey) {
+	public void setCompkey(CompKey_Submissions compkey) {
 		this.compkey = compkey;
 	}
-	public final String getChoice() {
+	public String getChoice() {
 		return choice;
 	}
-	public final void setChoice(String choice) {
+	public void setChoice(String choice) {
 		this.choice = choice;
 	}
-	public final String getState() {
+	public String getState() {
 		return state;
 	}
-	public final void setState(String state) {
+	public void setState(String state) {
 		this.state = state;
 	}
-	public final int getMark() {
+	public int getMark() {
 		return mark;
 	}
-	public final void setMark(int mark) {
+	public void setMark(int mark) {
 		this.mark = mark;
 	}
-	public final String getRightanswer() {
+	public String getRightanswer() {
 		return rightanswer;
 	}
-	public final void setRightanswer(String rightanswer) {
+	public void setRightanswer(String rightanswer) {
 		this.rightanswer = rightanswer;
 	}
 	@Override
