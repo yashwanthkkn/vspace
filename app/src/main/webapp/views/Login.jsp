@@ -31,7 +31,7 @@
                 
                     <div class="mt-3 text-center">
                         <div class="text-secondary mb-2"> OR</div>
-                        Don't have an account ? <a href="/auth/signup" >Sign Up</a><br>
+                        Don't have an account ? <a href="/signup" >Sign Up</a><br>
                     </div>
                 </form>
             </div>
