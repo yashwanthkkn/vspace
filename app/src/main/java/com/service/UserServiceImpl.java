@@ -6,10 +6,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-<<<<<<< HEAD
-import org.springframework.transaction.annotation.Transactional;
-=======
->>>>>>> f8089794fb24500bc44331518987d012a551806d
+
+
 
 import com.dao.UserDAO;
 import com.entities.User;
