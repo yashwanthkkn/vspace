@@ -1,4 +1,3 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,18 +15,20 @@
                 
                 <div class="h3 mt-4 text-primary text-center"><i class="fab fa-pied-piper-alt"></i> Vspace</div>
                 <small class="text-secondary text-center">Life's Better </small>             
-                <div class="h5 mt-4 text-secondary text-center">L o g i n</div>             
-                <spring:form class="mt-3" method="POST" action="/login" modelAttribute="user">
+                <div class="h5 mt-4 text-secondary text-center">L o g i n</div>     
+        
+                <form class="mt-3" name="login" method="POST" action="/doLogin">
                     <div class="form-group">
                         <label for="email">Email id</label>
-                        <spring:input type="email" path="emailid" placeholder="Email" class="form-control"/>
+                        <input type="email"  name="username" placeholder="Email" class="form-control" />
                     </div>
                     <div class="form-group mt-4">
                         <label for="password">Password</label>
-                        <spring:input type="password"  path="password" placeholder="Password" class="form-control"/>
+                        <input type="password"  name="password" placeholder="Password" class="form-control" />
                     </div>
+                    <!-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> -->
                     <div class="text-center mt-4">
-                        <button class="btn btn-primary btn-sm px-5">Login</button>
+                        <input class="btn btn-primary btn-sm px-5" type="submit" value="Login" />
                     </div>
                     <div class="my-2 text-center text-danger">
                         <%= request.getAttribute("msg") %>
