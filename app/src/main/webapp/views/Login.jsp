@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,24 +17,26 @@
                 <div class="h3 mt-4 text-primary text-center"><i class="fab fa-pied-piper-alt"></i> Vspace</div>
                 <small class="text-secondary text-center">Life's Better </small>             
                 <div class="h5 mt-4 text-secondary text-center">L o g i n</div>             
-                <form class="mt-3" method="POST" action="/login">
+                <spring:form class="mt-3" method="POST" action="/login" modelAttribute="user">
                     <div class="form-group">
                         <label for="email">Email id</label>
-                        <input type="email" name="username" id="username" placeholder="Email" class="form-control" required>
+                        <spring:input type="email" path="emailid" placeholder="Email" class="form-control"/>
                     </div>
                     <div class="form-group mt-4">
                         <label for="password">Password</label>
-                        <input type="password" name="password" id="password" placeholder="Password" class="form-control" required>
+                        <spring:input type="password"  path="password" placeholder="Password" class="form-control"/>
                     </div>
                     <div class="text-center mt-4">
                         <button class="btn btn-primary btn-sm px-5">Login</button>
                     </div>
-                
+                    <div class="my-2 text-center text-danger">
+                        <%= request.getAttribute("msg") %>
+                    </div>
                     <div class="mt-3 text-center">
                         <div class="text-secondary mb-2"> OR</div>
                         Don't have an account ? <a href="/signup" >Sign Up</a><br>
                     </div>
-                </form>
+                </spring:form>
             </div>
         </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

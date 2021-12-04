@@ -21,10 +21,30 @@ public class AuthController {
 	private UserService userService;
 	
 	@RequestMapping(value="/login",method = RequestMethod.GET)
-	public String login() {
-		return "Login";
+	public ModelAndView loadLoginPage1(ModelAndView mandv) {
+		mandv.addObject("user",new User());
+		mandv.addObject("msg","");
+		mandv.setViewName("Login");
+		return mandv;
 	}
-	
+	@RequestMapping(value="/login",method=RequestMethod.POST)
+	public ModelAndView processLoginPage1(User user,ModelAndView mandv) {
+		System.out.println(user.getEmailid()+":"+user.getPassword());
+		// check if user already exists
+		User tempUser = userService.findUserByEmailid(user.getEmailid());
+		if(tempUser != null) {
+			userService.saveUser(user);
+			mandv.setViewName("StudentDashboard");
+			return mandv;
+			
+		}else {
+			System.out.println(tempUser);
+			mandv.addObject("msg","Oops ! An account with the Email Id doesn't exists..,SIGNUP first");
+			mandv.addObject("user",new User());
+			mandv.setViewName("Login");
+			return mandv;
+		}
+	}
 	@RequestMapping(value="/signup",method = RequestMethod.GET)
 	public ModelAndView loadLoginPage(ModelAndView mandv) {
 		mandv.addObject("user",new User());
