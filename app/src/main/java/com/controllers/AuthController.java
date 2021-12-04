@@ -25,40 +25,39 @@ public class AuthController {
 	
 	// GET : /login
 	@RequestMapping(value="/login",method = RequestMethod.GET)
-<<<<<<< HEAD
-	public ModelAndView loadLoginPage1(ModelAndView mandv) {
-=======
 	public ModelAndView loadLoginPage(ModelAndView mandv) {
->>>>>>> 3d91b780de8f477ea29e3cdf8525dc89e8836dc6
+
 		mandv.addObject("user",new User());
 		mandv.addObject("msg","");
 		mandv.setViewName("Login");
 		return mandv;
-<<<<<<< HEAD
+
 	}
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public ModelAndView processLoginPage1(User user,ModelAndView mandv) {
+	public ModelAndView processLoginPage(User user,ModelAndView mandv) {
 		System.out.println(user.getEmailid()+":"+user.getPassword());
-		// check if user already exists
+		// check if user exists
 		User tempUser = userService.findUserByEmailid(user.getEmailid());
-		if(tempUser != null) {
-			userService.saveUser(user);
-			mandv.setViewName("StudentDashboard");
-			return mandv;
+		System.out.println(tempUser);
+		if(tempUser != null) 
+		{
+			//String password=passwordEncoder.encode(user.getPassword());
+			//System.out.println(password+ " : "+tempUser.getPassword());
+			if(tempUser.getPassword().equals(user.getPassword()))
+			{
+				return new ModelAndView("redirect:/admin/dashboard");
 			
-		}else {
-			System.out.println(tempUser);
-			mandv.addObject("msg","Oops ! An account with the Email Id doesn't exists..,SIGNUP first");
-			mandv.addObject("user",new User());
-			mandv.setViewName("Login");
-			return mandv;
+			}
+			mandv.addObject("msg","Password Invalid ");
 		}
+		else 
+		{
+		mandv.addObject("msg","Username Invalid ");
+		}
+		mandv.setViewName("Login");
+		return mandv;
 	}
-=======
-	}
-	
-	// GET : /signup
->>>>>>> 3d91b780de8f477ea29e3cdf8525dc89e8836dc6
+
 	@RequestMapping(value="/signup",method = RequestMethod.GET)
 	public ModelAndView loadSignupPage(ModelAndView mandv) {
 		mandv.addObject("user",new User());
@@ -82,7 +81,7 @@ public class AuthController {
 		}else {
 			// create new user
 			String password = user.getPassword();
-			user.setPassword(passwordEncoder.encode(password));
+		//	user.setPassword(passwordEncoder.encode(password));
 			userService.saveUser(user);
 			return new ModelAndView("redirect:/login");
 		}

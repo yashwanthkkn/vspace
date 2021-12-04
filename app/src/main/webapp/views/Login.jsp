@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,14 +18,14 @@
                 <small class="text-secondary text-center">Life's Better </small>             
                 <div class="h5 mt-4 text-secondary text-center">L o g i n</div>     
         
-                <form class="mt-3" name="login" method="POST" action="/doLogin">
+                <spring:form class="mt-3" name="login" method="POST" action="/login" modelAttribute="user">
                     <div class="form-group">
                         <label for="email">Email id</label>
-                        <input type="email"  name="username" placeholder="Email" class="form-control" />
+                        <spring:input type="email"  path="emailid" placeholder="Email" class="form-control" />
                     </div>
                     <div class="form-group mt-4">
                         <label for="password">Password</label>
-                        <input type="password"  name="password" placeholder="Password" class="form-control" />
+                        <spring:input type="password" path="password" placeholder="Password" class="form-control" />
                     </div>
                     <!-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> -->
                     <div class="text-center mt-4">
