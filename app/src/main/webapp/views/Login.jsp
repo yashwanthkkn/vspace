@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,18 +16,20 @@
                 
                 <div class="h3 mt-4 text-primary text-center"><i class="fab fa-pied-piper-alt"></i> Vspace</div>
                 <small class="text-secondary text-center">Life's Better </small>             
-                <div class="h5 mt-4 text-secondary text-center">L o g i n</div>             
-                <form class="mt-3" method="POST" action="/login">
+                <div class="h5 mt-4 text-secondary text-center">L o g i n</div>     
+        
+                <form class="mt-3" name="login" method="POST" action="/doLogin">
                     <div class="form-group">
                         <label for="email">Email id</label>
-                        <input type="email" name="username" id="username" placeholder="Email" class="form-control" required>
+                        <input type="email"  name="username" placeholder="Email" class="form-control" />
                     </div>
                     <div class="form-group mt-4">
                         <label for="password">Password</label>
-                        <input type="password" name="password" id="password" placeholder="Password" class="form-control" required>
+                        <input type="password"  name="password" placeholder="Password" class="form-control" />
                     </div>
+                    <!-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> -->
                     <div class="text-center mt-4">
-                        <button class="btn btn-primary btn-sm px-5">Login</button>
+                        <input class="btn btn-primary btn-sm px-5" type="submit" value="Login" />
                     </div>
                 
                     <div class="mt-3 text-center">
