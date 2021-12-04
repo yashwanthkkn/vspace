@@ -18,7 +18,7 @@
                 <small class="text-secondary text-center">Life's Better </small>             
                 <div class="h5 mt-4 text-secondary text-center">L o g i n</div>     
         
-                <form class="mt-3" name="login" method="POST" action="/doLogin">
+                <form class="mt-3" name="login" method="POST" action="/login">
                     <div class="form-group">
                         <label for="email">Email id</label>
                         <input type="email"  name="username" placeholder="Email" class="form-control" />

@@ -46,27 +46,18 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		System.out.println("Fliters are called");
 
-//		http.authorizeRequests()
-//			.antMatchers("/")
-//			.permitAll()
-//			.antMatchers("/user/*")
-//			.authenticated()
-//			.antMatchers("/admin/*")
-//			.authenticated()
-//			.and()
-//			.formLogin()
-//			.loginPage("/login")
-//			.loginProcessingUrl("/doLogin")
-//			.permitAll();
-
-			http.authorizeRequests()
-				.antMatchers("/")
-				.permitAll()
-				.and()
-				.formLogin()
-				.loginPage("/login")
-				.loginProcessingUrl("/doLogin")
-				.permitAll();
+		http
+			.csrf()
+			.disable()
+			.authorizeRequests()
+			.antMatchers("/","/signup","/img/*","/styles/*").permitAll()
+			.antMatchers("/user/*").hasAnyAuthority("user")
+			.antMatchers("/admin/*").hasAnyAuthority("admin")
+			.anyRequest().authenticated()
+			.and()
+			.formLogin()
+			.loginPage("/login")
+			.permitAll();
 
 	}
 }
