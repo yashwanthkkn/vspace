@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="Header.jsp" />
     <nav class="navbar navbar-expand-lg navbar-light bg-light  px-5">
         <div class="container-fluid">
@@ -58,15 +59,18 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <c:forEach items="${test}" var="test">
+
                       <tr>
                         <td scope="row">
-                          <a href="/admin/test">Kec</a>
+                          <a href="/admin/test">${test.tname}</a>
                         </td>
-                        <td>12/12/12</td>
-                        <td>12 am</td>
-                        <td>1 hr</td>
+                        <td>${test.date}</td>
+                        <td>${test.start_time}</td>
+                        <td>${test.duration}</td>
                         <td>30</td>
                       </tr>
+                    </c:forEach>
                      
                     </tbody>
                 </table>
@@ -111,29 +115,29 @@
     <!-- MODAL -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header">
-          <h5 id="offcanvasRightLabel">Add Question</h5>
+          <h5 id="offcanvasRightLabel">Add Test</h5>
           <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <form>
+            <spring:form name="dashboard" method="POST" action="/admin/dashboard" modelAttribute="test">
                 <div class="mb-1">
                     <label for="testName" class="form-label">Test Name</label>
-                    <input placeholder="Aptitute-Kec" type="text" class="form-control form-control-sm" id="testName" >
+                    <spring:input placeholder="Aptitute-Kec" type="text" path="tname" class="form-control form-control-sm" />
                 </div>
                 <div class="mb-1">
                     <label for="date" class="form-label">Date</label>
-                    <input type="date" class="form-control form-control-sm" id="date" >
+                    <spring:input type="date" path="date" class="form-control form-control-sm" id="date" />
                 </div>
                 <div class="mb-1">
                     <label for="time" class="form-label">Start Time</label>
-                    <input type="time" class="form-control form-control-sm" id="time" >
+                    <spring:input type="time" path="start_time" class="form-control form-control-sm" id="time" />
                 </div>
                 <div class="mb-3">
                     <label for="duration" class="form-label">Duration</label>
-                    <input placeholder="eg. 1 hr" type="text" class="form-control form-control-sm" id="duration" >
+                    <spring:input placeholder="eg. 1 hr" type="text" path="duration" class="form-control form-control-sm" id="duration" />
                 </div>
                 <button type="submit" class="btn btn-primary btn-sm px-5">Create Test</button>
-              </form>
+              </spring:form>
         </div>
       </div>
   </div>
