@@ -1,5 +1,9 @@
 package com.controllers;
 
+import java.security.Principal;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,7 +14,10 @@ import com.entities.User;
 @RequestMapping("user")
 public class UserController {
 	@RequestMapping(value="/dashboard",method = RequestMethod.GET)
-	public String userDashboard() {
+	public String userDashboard(Principal principal) {
+		if(principal != null) {			
+			System.out.println(principal.getName());
+		}
 		return "StudentDashboard";
 	}
 	
