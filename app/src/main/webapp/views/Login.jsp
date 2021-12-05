@@ -18,7 +18,7 @@
                 <small class="text-secondary text-center">Life's Better </small>             
                 <div class="h5 mt-4 text-secondary text-center">L o g i n</div>     
         
-                <spring:form class="mt-3" name="login" method="POST" action="/login" modelAttribute="user">
+                <form class="mt-3" name="login" method="POST" action="/login">
                     <div class="form-group">
                         <label for="email">Email id</label>
                         <spring:input type="email"  path="emailid" placeholder="Email" class="form-control" />

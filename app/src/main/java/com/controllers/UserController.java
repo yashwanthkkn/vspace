@@ -10,7 +10,7 @@ import com.entities.User;
 @RequestMapping("user")
 public class UserController {
 	@RequestMapping(value="/dashboard",method = RequestMethod.GET)
-	public String login() {
+	public String userDashboard() {
 		return "StudentDashboard";
 	}
 	
