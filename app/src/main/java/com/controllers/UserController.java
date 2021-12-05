@@ -10,10 +10,8 @@ import com.entities.User;
 @RequestMapping("user")
 public class UserController {
 	@RequestMapping(value="/dashboard",method = RequestMethod.GET)
-	public ModelAndView loadLoginPage(ModelAndView mandv) {
-	//	mandv.addObject("userBean",new User());
-		mandv.setViewName("Login");
-		return mandv;
+	public String userDashboard() {
+		return "StudentDashboard";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
