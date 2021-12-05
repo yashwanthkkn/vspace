@@ -21,13 +21,13 @@
                 <form class="mt-3" name="login" method="POST" action="/login">
                     <div class="form-group">
                         <label for="email">Email id</label>
-                        <spring:input type="email"  path="emailid" placeholder="Email" class="form-control" />
+                        <input type="email"  name="username" placeholder="Email" class="form-control" />
                     </div>
                     <div class="form-group mt-4">
                         <label for="password">Password</label>
-                        <spring:input type="password" path="password" placeholder="Password" class="form-control" />
+                        <input type="password" name="password" placeholder="Password" class="form-control" />
                     </div>
-                    <!-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> -->
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <div class="text-center mt-4">
                         <input class="btn btn-primary btn-sm px-5" type="submit" value="Login" />
                     </div>
@@ -38,7 +38,7 @@
                         <div class="text-secondary mb-2"> OR</div>
                         Don't have an account ? <a href="/signup" >Sign Up</a><br>
                     </div>
-                </spring:form>
+                </form>
             </div>
         </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

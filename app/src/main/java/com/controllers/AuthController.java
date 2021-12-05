@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.entities.User;
@@ -25,39 +26,19 @@ public class AuthController {
 	
 	// GET : /login
 	@RequestMapping(value="/login",method = RequestMethod.GET)
-	public ModelAndView loadLoginPage(ModelAndView mandv) {
+	public ModelAndView loadLoginPage(ModelAndView mandv,@RequestParam(required = false) String error) {
 
-		mandv.addObject("user",new User());
 		mandv.addObject("msg","");
+		if(error != null) {
+			mandv.addObject("msg","Invalid Username or Password");
+		}
+		mandv.addObject("user",new User());
 		mandv.setViewName("Login");
 		return mandv;
 
 	}
-	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public ModelAndView processLoginPage(User user,ModelAndView mandv) {
-		System.out.println(user.getEmailid()+":"+user.getPassword());
-		// check if user exists
-		User tempUser = userService.findUserByEmailid(user.getEmailid());
-		System.out.println(tempUser);
-		if(tempUser != null) 
-		{
-			//String password=passwordEncoder.encode(user.getPassword());
-			//System.out.println(password+ " : "+tempUser.getPassword());
-			if(tempUser.getPassword().equals(user.getPassword()))
-			{
-				return new ModelAndView("redirect:/admin/dashboard");
-			
-			}
-			mandv.addObject("msg","Password Invalid ");
-		}
-		else 
-		{
-		mandv.addObject("msg","Username Invalid ");
-		}
-		mandv.setViewName("Login");
-		return mandv;
-	}
 
+	// GET : /signup
 	@RequestMapping(value="/signup",method = RequestMethod.GET)
 	public ModelAndView loadSignupPage(ModelAndView mandv) {
 		mandv.addObject("user",new User());
@@ -81,7 +62,7 @@ public class AuthController {
 		}else {
 			// create new user
 			String password = user.getPassword();
-		//	user.setPassword(passwordEncoder.encode(password));
+			user.setPassword(passwordEncoder.encode(password));
 			userService.saveUser(user);
 			return new ModelAndView("redirect:/login");
 		}

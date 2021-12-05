@@ -15,6 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -42,6 +44,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	    return new BCryptPasswordEncoder();
 	}
 	
+	@Bean
+	public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+	    return new LoginAuthenticationSuccessHandler();
+	}
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		System.out.println("Fliters are called");
@@ -60,7 +67,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 //			.permitAll();
 		http.authorizeRequests()
 			.antMatchers("**")
-			.permitAll();
+			.permitAll()
+			.and()
+			.formLogin()
+			.loginPage("/login")
+			.successHandler(myAuthenticationSuccessHandler())
+			.permitAll()
+			.and()
+			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
 
 	}
 }
