@@ -11,7 +11,7 @@ public class Test {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int tid;
 	private String tname;
-	private String state;
+	private String state="edit";
 	private float duration;
 	private String start_time;
 	private String date;
