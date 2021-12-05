@@ -39,13 +39,22 @@ public class AuthController {
 		// check if user exists
 		User tempUser = userService.findUserByEmailid(user.getEmailid());
 		System.out.println(tempUser);
-		if(tempUser != null) 
+		if(user.getEmailid().equals("admin@gmail.com")) 
+		{
+			if(user.getPassword().equals("admin")) {
+				return new ModelAndView("redirect:/admin/dashboard");
+			}
+			else {
+				mandv.addObject("msg","Admin Username Invalid ..");
+			}
+		}
+		else if(tempUser != null) 
 		{
 			//String password=passwordEncoder.encode(user.getPassword());
 			//System.out.println(password+ " : "+tempUser.getPassword());
 			if(tempUser.getPassword().equals(user.getPassword()))
 			{
-				return new ModelAndView("redirect:/admin/dashboard");
+				return new ModelAndView("redirect:/user/dashboard");
 			
 			}
 			mandv.addObject("msg","Password Invalid ");
