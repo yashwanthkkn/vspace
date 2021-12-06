@@ -1,9 +1,14 @@
 package com.entities;
 
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Test {
@@ -15,6 +20,17 @@ public class Test {
 	private float duration;
 	private String start_time;
 	private String date;
+	
+	@OneToMany(mappedBy = "test",cascade = CascadeType.ALL)
+	private List<Question> questions;
+	
+	
+	public List<Question> getQuestions() {
+		return questions;
+	}
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
 	public int getTid() {
 		return tid;
 	}

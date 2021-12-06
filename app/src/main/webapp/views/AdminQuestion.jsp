@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="Header.jsp" />
       <nav class="navbar navbar-expand-lg navbar-light bg-light  px-5">
         <div class="container-fluid">
@@ -97,38 +98,43 @@
               <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-                <form>
+                <spring:form name="question" method="POST" action="/admin/test/${test.tid}/qn" modelAttribute="question">
                     <div class="mb-2">
                       <label for="question" class="form-label">Question</label>
-                      <textarea type="email" class="form-control form-control-sm" id="question" ></textarea>
+                      <spring:textarea path="qtext" class="form-control form-control-sm" id="question" />
                     </div>
                     <div class="mb-1">
                         <label for="option1" class="form-label">Option 1</label>
-                        <input type="text" class="form-control form-control-sm" id="option1" >
+                        <spring:input type="text" path='options[0].answer' class="form-control form-control-sm" id="option1" />
                     </div>
                     <div class="mb-1">
                         <label for="option2" class="form-label">Option 2</label>
-                        <input type="text" class="form-control form-control-sm" id="option2" >
+                        <spring:input type="text" path='options[1].answer' class="form-control form-control-sm" id="option2" />
                     </div>
                     <div class="mb-1">
                         <label for="option3" class="form-label">Option 3</label>
-                        <input type="text" class="form-control form-control-sm" id="option3" >
+                        <spring:input type="text" path='options[2].answer' class="form-control form-control-sm" id="option3" />
                     </div>
                     <div class="mb-3">
                         <label for="option4" class="form-label">Option 4</label>
-                        <input type="text" class="form-control form-control-sm" id="option4" >
+                        <spring:input type="text" path='options[3].answer' class="form-control form-control-sm" id="option4" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="answer" class="form-label">Correct Option</label>
+                        <spring:select path='answer' class="form-select form-control-sm" >
+                            <spring:option value="0" label="1" />
+                            <spring:option value="1" label="2" />
+                            <spring:option value="2" label="3" />
+                            <spring:option value="3" label="4" />
+                        </spring:select>
+                        
                     </div>
                     <div class="mb-4">
-                        <select class="form-select form-control-sm" aria-label="Default select example">
-                            <option selected>Correct Option</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
-                    </div>
+                      <label for="mark" class="form-label">Mark</label>
+                      <spring:input type="text" path='mark' class="form-control form-control-sm" id="mark" />
+                  </div>
                     <button type="submit" class="btn btn-primary btn-sm px-5"><i class="fas fa-save"></i> Save</button>
-                  </form>
+                  </spring:form>
             </div>
           </div>
     </div>

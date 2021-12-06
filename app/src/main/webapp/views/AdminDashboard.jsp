@@ -63,7 +63,7 @@
 
                       <tr>
                         <td scope="row">
-                          <a href="/admin/test">${test.tname}</a>
+                          <a href="/admin/test/${test.tid}">${test.tname}</a>
                         </td>
                         <td>${test.date}</td>
                         <td>${test.start_time}</td>

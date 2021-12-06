@@ -4,35 +4,35 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Answer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int oid;
-	private int qid;
-	private String options;
-/*	public  int getOid() {
-		return oid;
-	}
-	public void setOid(int oid) {
-		this.oid = oid;
-	}*/
-	public  String getOptions() {
-		return options;
-	}
-	public void setOptions(String options) {
-		this.options = options;
-	}
+	private String answer;
+	
+	@ManyToOne()
+	@JoinColumn(name="qid")
+	private Question question;
 	
 	public Answer()
 	{
 		
 	}
-	public int getQid() {
-		return qid;
+
+	public String getAnswer() {
+		return answer;
 	}
-	public void setQid(int qid) {
-		this.qid = qid;
+
+	@Override
+	public String toString() {
+		return "Answer [oid=" + oid + ", answer=" + answer + ", question=" + question + "]";
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
 	}
 }

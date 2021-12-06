@@ -1,9 +1,16 @@
 package com.entities;
 
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Question {
@@ -13,6 +20,28 @@ public class Question {
 	private String qtext;
 	private String answer;
 	private int mark;
+	
+	@ManyToOne
+	@JoinColumn(name="tid")
+	private Test test;
+	
+	@OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
+	private List<Answer> options;
+	
+	
+	public Test getTest() {
+		return test;
+	}
+	public void setTest(Test test) {
+		this.test = test;
+	}
+	
+	public List<Answer> getOptions() {
+		return options;
+	}
+	public void setOptions(List<Answer> options) {
+		this.options = options;
+	}
 	public int getQid() {
 		return qid;
 	}
