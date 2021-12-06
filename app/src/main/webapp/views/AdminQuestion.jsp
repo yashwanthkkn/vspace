@@ -35,10 +35,23 @@
             <div class="col-12">
                 <div class="d-flex justify-content-between">
                   <div>
-                    <div class="h5">Test : <span class="text-primary">KEC</span></div>
+                    <div class="h5">Test : <span class="text-primary">${test.tname}</span></div>
                     <small class="text-secondary">Create and edit questions for the test</small>
                   </div>
-                    <div><button class="btn btn-primary btn-sm"><i class="fab fa-cloudscale"></i> Start Test</button></div>
+                    <c:if test="${test.state == 'edit'}">
+                      <div>
+                        <a href="/admin/test/${test.tid}/start">
+                          <button class="btn btn-primary btn-sm"><i class="fab fa-cloudscale"></i> Start Test</button>
+                        </a>
+                      </div>
+                    </c:if>
+                    <c:if test="${test.state == 'start'}">
+                      <div>
+                        <a href="/admin/test/${test.tid}/end">
+                          <button class="btn btn-danger btn-sm"><i class="fab fa-cloudscale"></i> End Test</button>
+                        </a>
+                      </div>
+                    </c:if>
                 </div>
             </div>
         </div>
@@ -47,7 +60,9 @@
             <div class="col-12">
                 <div class="d-flex justify-content-between">
                     <div class="h5">Questions</div>
-                    <div><button class="btn btn-primary btn-sm" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <i class="fas fa-plus"></i> Add Question</button></div>
+                    <c:if test="${test.state == 'edit'}">
+                      <div><button class="btn btn-primary btn-sm" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <i class="fas fa-plus"></i> Add Question</button></div>
+                    </c:if>
                 </div>
             </div>
         </div>
@@ -60,31 +75,31 @@
                         <th scope="col">S.No</th>
                         <th scope="col">Question</th>
                         <th scope="col">Marks</th>
-                        <th scope="col">Action</th>
+                        <c:if test="${test.state == 'edit'}">
+                          <th scope="col">Action</th>
+                        </c:if>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td scope="row">1</td>
-                        <td>Who is who...</td>
-                        <td>2</td>
-                        <td colspan="2">
-                            <button class="btn btn-primary btn-sm "><i class="fas fa-edit"></i> edit</button>
-                            <span class="px-2"></span>
-                            <button class="btn btn-danger btn-sm">delete</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td scope="row">2</td>
-                        <td>What is what...</td>
-                        <td>2</td>
-                        <td colspan="2">
-                            <button class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> edit</button>
-                            <span class="px-2"></span>
-                            <button class="btn btn-danger btn-sm">delete</button>
-                        </td>
-                      </tr>
-                     
+                      <c:forEach items="${questions}" var="question" varStatus="loop" >
+                        <tr>
+                          <td scope="row">
+                            ${loop.index+1}
+                          </td>
+                          <td>${question.qtext}</td>
+                          <td>${question.mark}</td>
+                          <c:if test="${test.state == 'edit'}">
+                            <td colspan="2">
+                              <!-- <button class="btn btn-primary btn-sm "><i class="fas fa-edit"></i> edit</button> -->
+                              <span class="px-2"></span>
+  
+                              <a href="/admin/test/${test.tid}/qn/${question.qid}/d">
+                                <button class="btn btn-danger btn-sm">delete</button>
+                              </a>
+                            </td>  
+                          </c:if>
+                        </tr>
+                      </c:forEach>
                     </tbody>
                 </table>
             </div>

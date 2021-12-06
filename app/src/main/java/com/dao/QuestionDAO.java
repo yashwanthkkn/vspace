@@ -12,5 +12,7 @@ public interface QuestionDAO {
     void deleteQuestionById(int qid);
      
     List<Question> findAllQuestions();
+    
+    List<Question> findAllQuestionsByTid(int tid);
  
 }

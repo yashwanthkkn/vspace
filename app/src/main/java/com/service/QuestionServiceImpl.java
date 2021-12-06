@@ -3,6 +3,7 @@ package com.service;
 import java.util.List;
 
 import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,7 @@ public class QuestionServiceImpl implements QuestionService{
 			entity.setAnswer(question.getAnswer());
 			entity.setMark(question.getMark());
 			entity.setQtext(question.getQtext());
+			entity.setIdx(question.getIdx());
 		}
 	}
 
@@ -48,7 +50,7 @@ public class QuestionServiceImpl implements QuestionService{
 
 	@Override
 	public List<Question> findQuestionsByTid(int tid) {
-		return null;
+		return dao.findAllQuestionsByTid(tid);
 	}
 
 }

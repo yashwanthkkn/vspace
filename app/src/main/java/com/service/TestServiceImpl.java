@@ -33,6 +33,7 @@ public class TestServiceImpl implements TestService{
 			entity.setDuration(test.getDuration());
 			entity.setStart_time(test.getStart_time());
 			entity.setTname(test.getTname());
+			entity.setState(test.getState());
 		}
 		
 	}

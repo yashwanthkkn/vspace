@@ -58,6 +58,7 @@ public class AdminController {
 	public ModelAndView test(ModelAndView mandv, @PathVariable int id) {
 		Test test = testService.findById(id);
 		Question question = new Question();
+		List<Question> questions = questionService.findQuestionsByTid(id);
 		List<Answer> options = new ArrayList<>();
 		for(int i = 0 ; i < 4 ; i++) {
 			options.add(new Answer());
@@ -65,13 +66,13 @@ public class AdminController {
 		question.setOptions(options);
 		mandv.addObject("question",question);
 		mandv.addObject("test",test);
+		mandv.addObject("questions",questions);
 		mandv.setViewName("AdminQuestion");
 		return mandv;
 	}
 	
 	@RequestMapping(value="/test/{tid}/qn",method = RequestMethod.POST)
 	public String postQuestion(Question question,@PathVariable int tid) {
-		System.out.println(question);
 		Test test = testService.findById(tid);
 		question.setTest(test);
 		question.setAnswer(question.getOptions().get(Integer.parseInt(question.getAnswer())).getAnswer());
@@ -83,8 +84,39 @@ public class AdminController {
 		return "redirect:/admin/test/"+tid;
 	}
 	
+	@RequestMapping(value="/test/{tid}/qn/{qid}/d",method = RequestMethod.GET)
+	public String deleteQuestion(@PathVariable int tid,@PathVariable int qid) {
+		questionService.deleteQuestionById(qid);
+		return "redirect:/admin/test/"+tid;
+	}
+	
 	@RequestMapping(value="/result",method = RequestMethod.GET)
 	public String result() {
 		return "AdminResult";
+	}
+	
+	@RequestMapping(value="/test/{tid}/start",method = RequestMethod.GET)
+	public String startTest(@PathVariable int tid) {
+		Test test = testService.findById(tid);
+		test.setState("start");
+		int idx = 1;
+		Iterator<Question> questions = questionService.findQuestionsByTid(tid).iterator();
+		while(questions.hasNext()) {
+			Question qn = questions.next();
+			qn.setIdx(idx++);
+			System.out.println(qn.toString());
+			questionService.updateQuestion(qn);
+		}
+		System.out.println(test.toString());
+		testService.updateTest(test);
+		return "redirect:/admin/test/"+tid;
+	}
+	
+	@RequestMapping(value="/test/{tid}/end",method = RequestMethod.GET)
+	public String endTest(@PathVariable int tid) {
+		Test test = testService.findById(tid);
+		test.setState("end");
+		testService.updateTest(test);
+		return "redirect:/admin/dashboard";
 	}
 }

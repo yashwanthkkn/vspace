@@ -15,6 +15,8 @@ public class User {
 	private String emailid;
 	private boolean emailVerified=false;
 	private String claim="user";
+	private int last_attempted;  
+	
 	public boolean isEmailVerified() {
 		return emailVerified;
 	}
@@ -65,6 +67,12 @@ public class User {
 	}
 	public User() {
 		
+	}
+	public int getLast_attempted() {
+		return last_attempted;
+	}
+	public void setLast_attempted(int last_attempted) {
+		this.last_attempted = last_attempted;
 	}
 	
 }

@@ -64,6 +64,9 @@
                       <tr>
                         <td scope="row">
                           <a href="/admin/test/${test.tid}">${test.tname}</a>
+                          <c:if test="${test.state == 'start'}">
+                            <span class="badge rounded-pill bg-success">live</span>
+                          </c:if>
                         </td>
                         <td>${test.date}</td>
                         <td>${test.start_time}</td>

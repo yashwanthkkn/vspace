@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,6 +21,7 @@ public class Question {
 	private String qtext;
 	private String answer;
 	private int mark;
+	private int idx;
 	
 	@ManyToOne
 	@JoinColumn(name="tid")
@@ -66,9 +68,10 @@ public class Question {
 	public void setMark(int mark) {
 		this.mark = mark;
 	}
+
 	@Override
 	public String toString() {
-		return "Question [qid=" + qid + ", qtext=" + qtext + ", answer=" + answer + ", mark=" + mark + "]";
+		return "Question [qtext=" + qtext + ", answer=" + answer + ", mark=" + mark + ", idx=" + idx + "]";
 	}
 	public Question(String qtext, String answer, int mark) {
 		super();
@@ -78,6 +81,12 @@ public class Question {
 	}
 	public Question() {
 		
+	}
+	public int getIdx() {
+		return idx;
+	}
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 	
 }
