@@ -32,7 +32,7 @@ public class UserDAOImpl extends AbstractDAO<Integer, User> implements UserDAO{
 	@Override
 	public void deleteUserById(int uid) {
 		Criteria criteria =  createEntityCriteria();
-       User user=(User)criteria.add(Restrictions.eq("uid", uid)).uniqueResult();
+        User user=(User)criteria.add(Restrictions.eq("uid", uid)).uniqueResult();
         delete(user);
 		
 	}
@@ -46,12 +46,8 @@ public class UserDAOImpl extends AbstractDAO<Integer, User> implements UserDAO{
 	@Override
 	public User findUserByEmailid(String emailid) {
 		Criteria criteria = createEntityCriteria();
-        criteria.add(Restrictions.eq("emailid", emailid));
-        
+        criteria.add(Restrictions.eq("emailid", emailid));  
         return (User) criteria.uniqueResult();
 	}
 	
-		
-	
-
 }

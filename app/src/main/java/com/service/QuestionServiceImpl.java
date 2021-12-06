@@ -53,4 +53,9 @@ public class QuestionServiceImpl implements QuestionService{
 		return dao.findAllQuestionsByTid(tid);
 	}
 
+	@Override
+	public Question findQuestionByTidAndIdx(int tid, int idx) {
+		return dao.findQuestionByTidAndIdx(tid, idx);
+	}
+
 }

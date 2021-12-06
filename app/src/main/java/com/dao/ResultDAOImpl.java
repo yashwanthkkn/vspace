@@ -28,9 +28,8 @@ public class ResultDAOImpl extends AbstractDAO<Integer, Result> implements Resul
 	@Override
 	public void deleteResultById(int tid) {
 		Criteria criteria =  createEntityCriteria();
-	       Result result=(Result)criteria.add(Restrictions.eq("tid", tid)).uniqueResult();
-	        delete(result);
-		
+	    Result result=(Result)criteria.add(Restrictions.eq("tid", tid)).uniqueResult();
+	    delete(result);	
 	}
 
 	@Override

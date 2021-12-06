@@ -12,4 +12,6 @@ public interface AnswerDAO {
     void deleteAnswerById(int optid);
      
     List<Answer> findAllAnswers();
+    
+    List<Answer> findAllAnswersByQid(int qid);
 }

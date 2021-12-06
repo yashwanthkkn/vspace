@@ -15,4 +15,5 @@ public interface QuestionDAO {
     
     List<Question> findAllQuestionsByTid(int tid);
  
+    Question findQuestionByTidAndIdx(int tid,int idx);
 }

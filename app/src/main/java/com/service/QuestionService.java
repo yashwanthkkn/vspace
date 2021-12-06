@@ -17,4 +17,6 @@ public interface QuestionService {
     List<Question> findAllTests(); 
     
     List<Question> findQuestionsByTid(int tid);
+    
+    Question findQuestionByTidAndIdx(int tid,int idx);
 }

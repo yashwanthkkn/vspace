@@ -64,7 +64,7 @@
                             <td>30</td>
                             <td> 
                               <div>
-                                <a href="testPage.html">
+                                <a href="/user/test/${test.tid}/start">
                                   <button class="btn btn-primary btn-sm"><i class="fab fa-cloudscale"></i> Start Test</button>
                                 </a>
                               </div>

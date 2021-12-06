@@ -39,4 +39,10 @@ public class AnswerDAOImpl extends AbstractDAO<Integer, Answer> implements Answe
         return (List<Answer>) criteria.list();
 	}
 
+	@Override
+	public List<Answer> findAllAnswersByQid(int qid) {
+		Criteria criteria = createEntityCriteria();
+		return (List<Answer>) criteria.add(Restrictions.eq("question.qid", qid)).list();
+	}
+
 }

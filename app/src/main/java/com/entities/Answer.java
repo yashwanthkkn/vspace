@@ -14,6 +14,14 @@ public class Answer {
 	private int oid;
 	private String answer;
 	
+	public int getOid() {
+		return oid;
+	}
+
+	public void setOid(int oid) {
+		this.oid = oid;
+	}
+
 	@ManyToOne()
 	@JoinColumn(name="qid")
 	private Question question;
