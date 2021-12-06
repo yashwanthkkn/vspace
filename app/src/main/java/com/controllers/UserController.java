@@ -14,26 +14,24 @@ import org.springframework.web.servlet.ModelAndView;
 import com.entities.Test;
 import com.entities.User;
 import com.service.TestService;
+import com.service.UserService;
 @Controller
 @RequestMapping("user")
 public class UserController {
 	@Autowired
 	TestService testService;
-/*	@RequestMapping(value="/dashboard",method = RequestMethod.GET)
-	public String userDashboard(Principal principal) {
-		if(principal != null) {			
-			System.out.println(principal.getName());
-		}
-		
-		return "StudentDashboard";
-	}*/
-	
+	@Autowired
+	UserService userService;
+
 	@RequestMapping(value="/dashboard", method=RequestMethod.GET)
-	public ModelAndView processLoginPage(User user,ModelAndView mandv) {
-		System.out.println(user.getEmailid()+":"+user.getPassword());
-		mandv.addObject("userBean",user);
+	public ModelAndView processLoginPage(ModelAndView mandv,Principal principal) {
+		if(principal == null) {
+			return new ModelAndView("redirect:/login");
+		}
+		User user = userService.findUserByEmailid(principal.getName());
 		List<Test> tests = testService.findAllTests();
 		mandv.addObject("tests",tests);
+		mandv.addObject("user",user);
 		mandv.setViewName("StudentDashboard");
 		return mandv;
 	}

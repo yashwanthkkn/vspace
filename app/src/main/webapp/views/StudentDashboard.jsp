@@ -56,21 +56,21 @@
                     <tbody>
                       <c:forEach items="${tests}" var="test">
                         <c:if test="${test.state == 'start'}">
-                      <tr>
-                        <td scope="row"> ${test.tname}</td>
-                        <td>${test.date}</td>
-                        <td>${test.start_time}</td>
-                        <td>${test.duration}</td>
-                        <td>30</td>
-                        <td> 
-                          <div>
-                            <a href="testPage.html">
-                              <button class="btn btn-primary btn-sm"><i class="fab fa-cloudscale"></i> Start Test</button>
-                            </a>
-                          </div>
-                        </td>
-                      </tr>
-                    </c:if>
+                          <tr>
+                            <td scope="row"> ${test.tname}</td>
+                            <td>${test.date}</td>
+                            <td>${test.start_time}</td>
+                            <td>${test.duration}</td>
+                            <td>30</td>
+                            <td> 
+                              <div>
+                                <a href="testPage.html">
+                                  <button class="btn btn-primary btn-sm"><i class="fab fa-cloudscale"></i> Start Test</button>
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+                        </c:if>
                     </c:forEach>
                     </tbody>
                 </table>
