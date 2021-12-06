@@ -72,10 +72,14 @@ public class AdminController {
 	@RequestMapping(value="/test/{tid}/qn",method = RequestMethod.POST)
 	public String postQuestion(Question question,@PathVariable int tid) {
 		System.out.println(question);
+		Test test = testService.findById(tid);
+		question.setTest(test);
+		question.setAnswer(question.getOptions().get(Integer.parseInt(question.getAnswer())).getAnswer());
 		Iterator<Answer> options = question.getOptions().iterator();
 		while(options.hasNext()) {
-			System.out.println(options.next().toString());
+			options.next().setQuestion(question);
 		}
+		questionService.saveQuestion(question);
 		return "redirect:/admin/test/"+tid;
 	}
 	
