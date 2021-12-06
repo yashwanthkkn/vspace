@@ -5,7 +5,7 @@ import java.util.List;
 import com.entities.User;
 
 public interface UserService {
-User findById(int uid);
+	User findById(int uid);
     
     void saveUser(User user);
      

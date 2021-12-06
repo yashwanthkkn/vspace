@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="Header.jsp" />
       <nav class="navbar navbar-expand-lg navbar-light bg-light  px-5">
           <div class="container-fluid">
@@ -53,11 +54,13 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <c:forEach items="${tests}" var="test">
+                        <c:if test="${test.state == 'start'}">
                       <tr>
-                        <td scope="row"> Kec</td>
-                        <td>12/12/12</td>
-                        <td>12 am</td>
-                        <td>1 hr</td>
+                        <td scope="row"> ${test.tname}</td>
+                        <td>${test.date}</td>
+                        <td>${test.start_time}</td>
+                        <td>${test.duration}</td>
                         <td>30</td>
                         <td> 
                           <div>
@@ -67,7 +70,8 @@
                           </div>
                         </td>
                       </tr>
-                     
+                    </c:if>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
@@ -92,6 +96,7 @@
                       </tr>
                     </thead>
                     <tbody>
+                      
                       <tr>
                         <td scope="row">RMK</td>
                         <td>12/12/12</td>
