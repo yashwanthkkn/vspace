@@ -47,4 +47,10 @@ public class TestDAOImpl extends AbstractDAO<Integer, Test> implements TestDAO{
         return (Test) criteria.uniqueResult();
 	}
 
+	@Override
+	public List<Test> findByState(String state) {
+		Criteria criteria = createEntityCriteria();
+		return (List<Test>)criteria.add(Restrictions.eq("state", state)).list();
+	}
+
 }

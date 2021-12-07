@@ -54,8 +54,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <c:forEach items="${tests}" var="test">
-                        <c:if test="${test.state == 'start'}">
+                      <c:forEach items="${currentTest}" var="test">
                           <tr>
                             <td scope="row"> ${test.tname}</td>
                             <td>${test.date}</td>
@@ -70,7 +69,6 @@
                               </div>
                             </td>
                           </tr>
-                        </c:if>
                     </c:forEach>
                     </tbody>
                 </table>

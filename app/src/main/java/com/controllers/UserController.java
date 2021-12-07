@@ -1,6 +1,7 @@
 package com.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -52,8 +53,44 @@ public class UserController {
 		
 		User user = userService.findUserByEmailid(principal.getName());
 		List<Test> tests = testService.findAllTests();
+		List<Test> liveTest = new ArrayList<Test>();
+		List<Participation> participations = participationService.findParticipationsByUid(user.getUid());
+		System.out.println(participations.get(0)); // 1 particpation
+		List<Test> currentTest = new ArrayList<Test>();
+		List<Test> completedTest = new ArrayList<Test>();
+		Iterator<Test> itr = tests.iterator();
+		while(itr.hasNext()) {
+			Test temp = itr.next();
+			if(temp.getState().equals("start")) {
+				liveTest.add(temp); 
+			}
+		}
+		for(int i = 0 ; i < participations.size()  ; i++) {
+			for(int j = 0; j < liveTest.size(); j++) {
+				if(participations.get(i).getPk().getTid() == liveTest.get(j).getTid()) {
+					if(participations.get(i).getLast_attempted() == participations.get(i).getTotalQn()) {
+						completedTest.add(liveTest.get(j));
+					}else {
+						currentTest.add(liveTest.get(j));
+					}
+				}else {
+					currentTest.add(liveTest.get(j));					
+				}
+			}
+		}
+		itr = currentTest.iterator();
+		while(itr.hasNext()) {
+			System.out.println(itr.next());
+		}
+		
+		itr = completedTest.iterator();
+		while(itr.hasNext()) {
+			System.out.println(itr.next());
+		}
 		mandv.addObject("tests",tests);
 		mandv.addObject("user",user);
+		mandv.addObject("currentTest",currentTest);
+		mandv.addObject("completedTest",completedTest);
 		mandv.setViewName("StudentDashboard");
 		return mandv;
 	}

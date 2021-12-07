@@ -16,5 +16,7 @@ public interface TestService {
     List<Test> findAllTests(); 
      
     Test findTestByTestName(String tname);
+    
+    List<Test> findByState(String state);
  
 }

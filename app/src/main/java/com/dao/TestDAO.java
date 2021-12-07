@@ -14,4 +14,6 @@ public interface TestDAO {
     List<Test> findAllTests();
  
     Test findTestByTestName(String tname);
+    
+    List<Test> findByState(String state);
 }

@@ -54,4 +54,9 @@ public class TestServiceImpl implements TestService{
 		return dao.findTestByTestName(tname);
 	}
 
+	@Override
+	public List<Test> findByState(String state) {
+		return dao.findByState(state);
+	}
+
 }
