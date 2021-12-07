@@ -18,9 +18,9 @@ import com.dao.TestDAOImpl;
 import com.dao.UserDAO;
 import com.dao.UserDAOImpl;
 import com.entities.Answer;
-import com.entities.CompKey_Submissions;
+import com.entities.SubmissionPk;
 import com.entities.Question;
-import com.entities.Submissions;
+import com.entities.Submission;
 import com.entities.Test;
 import com.entities.User;
 import com.service.UserService;
@@ -33,18 +33,18 @@ public class SubmissionsClient {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext ctx =  SpringApplication.run(SubmissionsClient.class, args);
-		CompKey_Submissions comp=new CompKey_Submissions();
+		SubmissionPk comp=new SubmissionPk();
 		comp.setQid(1);
 		comp.setTid(1);
 		comp.setUid(1);
-		Submissions sub=new Submissions();
+		Submission sub=new Submission();
 		sub.setCompkey(comp);
 		sub.setChoice("Choice_Correct");
 		sub.setMark(200);
 		sub.setState("Wrong");
 		sub.setRightanswer("HEllo");
 		SubmissionsDAO dao = ctx.getBean("SubmissionsDAO",SubmissionsDAO.class);
-		dao.saveSubmissions(sub);
+//		dao.saveSubmissions(sub);
 	}
 
 }

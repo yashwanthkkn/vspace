@@ -6,17 +6,19 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
 @Entity
-public class Submissions implements Serializable{
+public class Submission implements Serializable{
+	
 	@EmbeddedId
-	CompKey_Submissions compkey;
+	SubmissionPk compkey;
+	
 	private String choice;
 	private String state;
 	private int mark;
 	private String rightanswer;
-	public CompKey_Submissions getCompkey() {
+	public SubmissionPk getCompkey() {
 		return compkey;
 	}
-	public void setCompkey(CompKey_Submissions compkey) {
+	public void setCompkey(SubmissionPk compkey) {
 		this.compkey = compkey;
 	}
 	public String getChoice() {

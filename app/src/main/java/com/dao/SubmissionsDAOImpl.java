@@ -8,35 +8,33 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.entities.Result;
-import com.entities.Submissions;
+import com.entities.Submission;
+import com.entities.SubmissionPk;
 
 @Repository("SubmissionsDAO")
 @Transactional
-public class SubmissionsDAOImpl extends AbstractDAO<Integer, Submissions> implements SubmissionsDAO{
+public class SubmissionsDAOImpl extends AbstractDAO<SubmissionPk, Submission> implements SubmissionsDAO{
 
 	@Override
-	public Submissions findById(int qid) {
-		return getByKey(qid);
+	public Submission findById(SubmissionPk pk) {
+		return getByKey(pk);
 	}
 
 	@Override
-	public void saveSubmissions(Submissions submissions) {
+	public void saveSubmission(Submission submissions) {
 		persist(submissions);
 		
 	}
 
 	@Override
-	public void deleteSubmissionsById(int qid) {
-		Criteria criteria =  createEntityCriteria();
-	       Submissions sub=(Submissions)criteria.add(Restrictions.eq("qid", qid)).uniqueResult();
-	        delete(sub);
-		
+	public void deleteSubmission(Submission submission) {
+	    delete(submission);
 	}
 
 	@Override
-	public List<Submissions> findAllSubmissionss() {
+	public List<Submission> findAllSubmissionss() {
 		Criteria criteria = createEntityCriteria();
-        return (List<Submissions>) criteria.list();
+        return (List<Submission>) criteria.list();
 	}
 
 }

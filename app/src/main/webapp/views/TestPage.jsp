@@ -53,25 +53,6 @@
                         </div>
                       </div>
                     </c:forEach>
-                    <!-- <div class="card px-2 py-2 mb-2">
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="answer" id="option1" value="${options[0].answer}" />
-                        <label class="form-check-label" for="option1">${options[0].answer}</label>
-                      </div>
-                    </div> -->
-                    <!-- <div class="card px-2 py-2 mb-2">
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Options" id="option1" value="option1">
-                        <label class="form-check-label" for="option1">Hello</label>
-                      </div>
-                    </div>
-                    <div class="card px-2 py-2 mb-2">
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Options" id="option1" value="option1">
-                        <label class="form-check-label" for="option1">Hello</label>
-                      </div>
-                    </div>
-                    -->
                     <input type="submit" class="btn btn-primary btn-sm mt-5 px-5" label="Next" />
                   </spring:form>
                 </div>

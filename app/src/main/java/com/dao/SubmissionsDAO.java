@@ -2,14 +2,15 @@ package com.dao;
 
 import java.util.List;
 
-import com.entities.Submissions;
+import com.entities.SubmissionPk;
+import com.entities.Submission;
 
 public interface SubmissionsDAO {
-	Submissions findById(int qid);
+	Submission findById(SubmissionPk pk);
 	 
-    void saveSubmissions(Submissions submissions);
+    void saveSubmission(Submission submission);
      
-    void deleteSubmissionsById(int qid);
+    void deleteSubmission(Submission submission);
      
-    List<Submissions> findAllSubmissionss();
+    List<Submission> findAllSubmissionss();
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 @Embeddable
-public class CompKey_Submissions implements Serializable{
+public class SubmissionPk implements Serializable{
 	
 	private int uid;
 	private int tid;

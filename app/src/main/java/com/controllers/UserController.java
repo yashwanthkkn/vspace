@@ -13,15 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dao.SubmissionsDAO;
 import com.entities.Answer;
 import com.entities.Participation;
 import com.entities.ParticipationPk;
 import com.entities.Question;
+import com.entities.Submission;
+import com.entities.SubmissionPk;
 import com.entities.Test;
 import com.entities.User;
 import com.service.AnswerService;
 import com.service.ParticipationService;
 import com.service.QuestionService;
+import com.service.SubmissionService;
 import com.service.TestService;
 import com.service.UserService;
 @Controller
@@ -37,12 +41,15 @@ public class UserController {
 	QuestionService questionService;
 	@Autowired
 	AnswerService answerService;
+	@Autowired
+	SubmissionService submissionService;
 	
 	@RequestMapping(value="/dashboard", method=RequestMethod.GET)
 	public ModelAndView processLoginPage(ModelAndView mandv,Principal principal) {
 		if(principal == null) {
 			return new ModelAndView("redirect:/login");
 		}
+		
 		User user = userService.findUserByEmailid(principal.getName());
 		List<Test> tests = testService.findAllTests();
 		mandv.addObject("tests",tests);
@@ -109,8 +116,8 @@ public class UserController {
 
 		// checking the participation exists
 		Participation participation = participationService.findById(pk);
-		if(participation == null) {
-			return new ModelAndView("/user/dashboard");
+		if(participation == null || participation.getLast_attempted() == participation.getTotalQn()) {
+			return new ModelAndView("redirect:/user/dashboard");
 		}
 		System.out.println(participation);
 		Question question = questionService.findQuestionByTidAndIdx(tid, participation.getLast_attempted()+1);
@@ -122,5 +129,59 @@ public class UserController {
 		mandv.addObject("opt",new Answer());
 		mandv.setViewName("TestPage");
 		return mandv;
+	}
+	
+	@RequestMapping(value = "/test/{tid}/qn",method = RequestMethod.POST)
+	public String submitQuestion(Answer answer,ModelAndView mandv,@PathVariable int tid, Principal principal) {
+		// checking if the user id authorised
+		if(principal == null) {
+			return "redirect:/login";
+		}
+		
+		String username = principal.getName();
+		User user = userService.findUserByEmailid(username);
+
+		// generating primary key
+		ParticipationPk pk = new ParticipationPk();
+		pk.setTid(tid);
+		pk.setUid(user.getUid());
+
+		// checking the participation exists
+		Participation participation = participationService.findById(pk);
+		if(participation == null) {
+			return "redirect:/user/dashboard";
+		}
+		System.out.println(participation);
+		Question question = questionService.findQuestionByTidAndIdx(tid, participation.getLast_attempted()+1);
+
+		SubmissionPk subPk = new SubmissionPk();
+		subPk.setQid(question.getQid());
+		subPk.setTid(tid);
+		subPk.setUid(user.getUid());
+		
+		Submission sub = new Submission();
+		sub.setCompkey(subPk);
+		// check if the answer is right
+		sub.setChoice(answer.getAnswer());
+		sub.setRightanswer(question.getAnswer());
+		if(answer.getAnswer().equals(question.getAnswer())) {
+			// right answer
+			participation.setScore(participation.getScore()+question.getMark());
+			sub.setState("correct");
+			sub.setMark(question.getMark());
+		}else {
+			// wrong answer
+			sub.setState("wrong");
+			sub.setMark(0);
+		}
+		System.out.println(sub);
+		submissionService.saveSubmission(sub);
+		participation.setLast_attempted(participation.getLast_attempted()+1);
+		System.out.println(participation);
+		participationService.updateParticipation(participation);
+		if(participation.getLast_attempted() == participation.getTotalQn()) {
+			return "redirect:/user/dashboard";
+		}
+		return "redirect:/user/test/"+tid+"/qn";
 	}
 }
