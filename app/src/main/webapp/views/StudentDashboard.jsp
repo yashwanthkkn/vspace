@@ -85,6 +85,7 @@
             <div class="col-12">
                 <table class="table  table-striped">
                     <thead>
+                     
                       <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Date</th>
@@ -92,17 +93,18 @@
                         <th scope="col">Marks Scored</th>
                         <th scope="col">Rank</th>
                       </tr>
+                      
                     </thead>
                     <tbody>
-                      
+                      <c:forEach items="${completedTest}" var="test">
                       <tr>
-                        <td scope="row">RMK</td>
-                        <td>12/12/12</td>
+                        <td scope="row">${test.tname}</td>
+                        <td>${test.date}</td>
                         <td>100</td>
-                        <td>80</td>
+                        <td></td>
                         <td>3</td>
                       </tr>
-                     
+                     </c:forEach>
                     </tbody>
                 </table>
             </div>

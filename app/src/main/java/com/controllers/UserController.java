@@ -54,6 +54,7 @@ public class UserController {
 		User user = userService.findUserByEmailid(principal.getName());
 		List<Test> tests = testService.findAllTests();
 		List<Test> liveTest = new ArrayList<Test>();
+		List<Test> endTest = new ArrayList<Test>();
 		List<Participation> participations = participationService.findParticipationsByUid(user.getUid());
 		System.out.println(participations.get(0)); // 1 particpation
 		List<Test> currentTest = new ArrayList<Test>();
@@ -65,24 +66,50 @@ public class UserController {
 				liveTest.add(temp); 
 			}
 		}
-		for(int i = 0 ; i < participations.size()  ; i++) {
-			for(int j = 0; j < liveTest.size(); j++) {
-				if(participations.get(i).getPk().getTid() == liveTest.get(j).getTid()) {
-					if(participations.get(i).getLast_attempted() == participations.get(i).getTotalQn()) {
-						completedTest.add(liveTest.get(j));
+		int i,j;
+		for(i = 0 ; i < liveTest.size() ; i++) {
+			int flag = 0;
+			for(j = 0 ; j < participations.size() ; j++) {
+				if(liveTest.get(i).getTid() == participations.get(j).getPk().getTid()) {
+					flag = 1;
+					if(participations.get(j).getLast_attempted() == participations.get(j).getTotalQn()) {
+						// completed
+						completedTest.add(liveTest.get(i));
 					}else {
+						// not completed
 						currentTest.add(liveTest.get(j));
 					}
-				}else {
-					currentTest.add(liveTest.get(j));					
+				}
+			}
+			if(flag == 0) {
+				currentTest.add(liveTest.get(i));
+			}
+		}
+		itr =tests.iterator();
+		while(itr.hasNext()) {
+			Test temp = itr.next();
+			if(temp.getState().equals("end")) {
+				endTest.add(temp); 
+			}
+		}
+		for(i = 0 ; i < endTest.size() ; i++) {
+			int flag = 0;
+			for(j = 0 ; j < participations.size() ; j++) {
+				if(endTest.get(i).getTid() == participations.get(j).getPk().getTid()) {
+					flag = 1;
+					if(participations.get(j).getLast_attempted() == participations.get(j).getTotalQn()) {
+						// completed
+						completedTest.add(endTest.get(i));
+					}
 				}
 			}
 		}
+		System.out.println("Current test");
 		itr = currentTest.iterator();
 		while(itr.hasNext()) {
 			System.out.println(itr.next());
 		}
-		
+		System.out.println("Completed test");
 		itr = completedTest.iterator();
 		while(itr.hasNext()) {
 			System.out.println(itr.next());
