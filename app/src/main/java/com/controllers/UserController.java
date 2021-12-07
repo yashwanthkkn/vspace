@@ -29,6 +29,7 @@ import com.service.QuestionService;
 import com.service.SubmissionService;
 import com.service.TestService;
 import com.service.UserService;
+import com.util.TestPart;
 @Controller
 @RequestMapping("user")
 public class UserController {
@@ -56,9 +57,8 @@ public class UserController {
 		List<Test> liveTest = new ArrayList<Test>();
 		List<Test> endTest = new ArrayList<Test>();
 		List<Participation> participations = participationService.findParticipationsByUid(user.getUid());
-		System.out.println(participations.get(0)); // 1 particpation
 		List<Test> currentTest = new ArrayList<Test>();
-		List<Test> completedTest = new ArrayList<Test>();
+		List<TestPart> completedTest = new ArrayList<TestPart>();
 		Iterator<Test> itr = tests.iterator();
 		while(itr.hasNext()) {
 			Test temp = itr.next();
@@ -74,7 +74,10 @@ public class UserController {
 					flag = 1;
 					if(participations.get(j).getLast_attempted() == participations.get(j).getTotalQn()) {
 						// completed
-						completedTest.add(liveTest.get(i));
+						Test t = liveTest.get(i);
+						Participation p = participations.get(j);
+						TestPart tp = new TestPart(t,p);
+						completedTest.add(tp);
 					}else {
 						// not completed
 						currentTest.add(liveTest.get(j));
@@ -98,8 +101,10 @@ public class UserController {
 				if(endTest.get(i).getTid() == participations.get(j).getPk().getTid()) {
 					flag = 1;
 					if(participations.get(j).getLast_attempted() == participations.get(j).getTotalQn()) {
-						// completed
-						completedTest.add(endTest.get(i));
+						Test t = endTest.get(i);
+						Participation p = participations.get(j);
+						TestPart tp = new TestPart(t,p);
+						completedTest.add(tp);
 					}
 				}
 			}
@@ -110,15 +115,16 @@ public class UserController {
 			System.out.println(itr.next());
 		}
 		System.out.println("Completed test");
-		itr = completedTest.iterator();
-		while(itr.hasNext()) {
-			System.out.println(itr.next());
+		Iterator<TestPart> itr1 = completedTest.iterator();
+		while(itr1.hasNext()) {
+			TestPart t = itr1.next();
 		}
 		mandv.addObject("tests",tests);
 		mandv.addObject("user",user);
 		mandv.addObject("currentTest",currentTest);
 		mandv.addObject("completedTest",completedTest);
 		mandv.setViewName("StudentDashboard");
+//		mandv.setViewName("LAlalal");
 		return mandv;
 	}
 	

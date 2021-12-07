@@ -21,6 +21,7 @@ public class Test {
 	private float duration;
 	private String start_time;
 	private String date;
+	private int totalMarks;
 	
 	@OneToMany(mappedBy = "test",cascade = CascadeType.ALL)
 	private List<Question> questions;
@@ -83,6 +84,12 @@ public class Test {
 	}
 	public Test() {
 		
+	}
+	public int getTotalMarks() {
+		return totalMarks;
+	}
+	public void setTotalMarks(int totalMarks) {
+		this.totalMarks = totalMarks;
 	}
 	
 

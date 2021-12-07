@@ -101,13 +101,15 @@ public class AdminController {
 		test.setState("start");
 		int idx = 1;
 		Iterator<Question> questions = questionService.findQuestionsByTid(tid).iterator();
+		int totalMark = 0;
 		while(questions.hasNext()) {
 			Question qn = questions.next();
 			qn.setIdx(idx++);
+			totalMark += qn.getMark();
 			System.out.println(qn.toString());
 			questionService.updateQuestion(qn);
 		}
-		System.out.println(test.toString());
+		test.setTotalMarks(totalMark);
 		testService.updateTest(test);
 		return "redirect:/admin/test/"+tid;
 	}

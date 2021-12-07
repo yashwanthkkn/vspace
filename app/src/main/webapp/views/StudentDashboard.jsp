@@ -91,18 +91,18 @@
                         <th scope="col">Date</th>
                         <th scope="col">Total Marks</th>
                         <th scope="col">Marks Scored</th>
-                        <th scope="col">Rank</th>
+                        <!-- <th scope="col">Rank</th> -->
                       </tr>
                       
                     </thead>
                     <tbody>
                       <c:forEach items="${completedTest}" var="test">
                       <tr>
-                        <td scope="row">${test.tname}</td>
-                        <td>${test.date}</td>
-                        <td>100</td>
-                        <td></td>
-                        <td>3</td>
+                        <td scope="row">${test.test.tname}</td>
+                        <td>${test.test.date}</td>
+                        <td>${test.test.totalMarks}</td>
+                        <td>${test.participation.score}</td>
+                        <!-- <td>3</td> -->
                       </tr>
                      </c:forEach>
                     </tbody>
