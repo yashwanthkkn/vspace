@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="Header.jsp" />
       <nav class="navbar navbar-expand-lg navbar-light bg-light  px-5">
         <div class="container-fluid">
@@ -42,7 +43,7 @@
             <div class="col-12">
                 <div class="d-flex justify-content-between">
                     <div class="h5">Test : <span class="text-primary">KEC</span></div>
-                    <div><button class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download Result</button></div>
+                    <div> <a href="/admin/excelExport" class="btn btn-success"><i class="fas fa-download"></i> Download Result</a></div>
                 </div>
             </div>
         </div>
@@ -59,14 +60,14 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <c:forEach items="${users}" var="users">
                       <tr>
-                        <td scope="row">Yash</td>
-                        <td>yash@gmail.com</td>
-                        <td>76</td>
+                        <td scope="row">${users.user.name}</td>
+                        <td>${users.user.emailid}</td>
+                        <td>${users.participation.score}</td>
                         <td>1</td>
-                        <td>3</td>
                       </tr>
-                     
+                     </c:forEach>
                     </tbody>
                 </table>
             </div>

@@ -10,6 +10,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
 import com.entities.Submission;
+import com.util.UserPart;
 public class ExcelExport extends AbstractXlsxView {
 
     @Override
@@ -20,36 +21,32 @@ public class ExcelExport extends AbstractXlsxView {
            HttpServletResponse response) throws Exception {
 
        // define excel file name to be exported
-       response.addHeader("Content-Disposition", "attachment;fileName=SubmissionData.xlsx");
+       response.addHeader("Content-Disposition", "attachment;fileName=ParticipationData.xlsx");
 
        // read data provided by controller
        @SuppressWarnings("unchecked")
-       List<Submission> list = (List<Submission>) model.get("list");
+       List<UserPart> list = (List<UserPart>) model.get("list");
 
        // create one sheet 
-       Sheet sheet = workbook.createSheet("Submission");
+       Sheet sheet = workbook.createSheet("Participation");
 
        // create row0 as a header
        Row row0 = sheet.createRow(0);
-       row0.createCell(0).setCellValue("TEST_ID");
-       row0.createCell(1).setCellValue("QUESTION_ID");
-       row0.createCell(2).setCellValue("USER_ID");
-       row0.createCell(3).setCellValue("CHOICE");
-       row0.createCell(4).setCellValue("MARK");
-       row0.createCell(5).setCellValue("RIGHTANSWER");
-       row0.createCell(6).setCellValue("STATE");
+       row0.createCell(0).setCellValue("USER NAME");
+       row0.createCell(1).setCellValue("USER EMAILID");
+       row0.createCell(2).setCellValue("SCORE");
+       row0.createCell(3).setCellValue("RANK");
+       
 
        // create row1 onwards from List<T>
        int rowNum = 1;
-       for(Submission spec : list) {
+       for(UserPart spec : list) {
            Row row = sheet.createRow(rowNum++);
-           row.createCell(0).setCellValue(spec.getCompkey().getTid());
-           row.createCell(1).setCellValue(spec.getCompkey().getQid());
-           row.createCell(2).setCellValue(spec.getCompkey().getUid());
-           row.createCell(3).setCellValue(spec.getChoice());
-           row.createCell(4).setCellValue(spec.getMark());
-           row.createCell(5).setCellValue(spec.getRightanswer());
-           row.createCell(6).setCellValue(spec.getState());
+           row.createCell(0).setCellValue(spec.getUser().getName());
+           row.createCell(1).setCellValue(spec.getUser().getEmailid());
+           row.createCell(2).setCellValue(spec.getParticipation().getScore());
+           row.createCell(3).setCellValue(spec.getParticipation().getTotalQn());
+           
        }
     }
 }

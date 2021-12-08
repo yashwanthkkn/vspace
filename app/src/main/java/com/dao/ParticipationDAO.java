@@ -16,5 +16,6 @@ public interface ParticipationDAO {
 	List<Participation> findAllParticipation();
 	
 	List<Participation> findAllParticipationByUserId(int uid);
+	List<Participation> findAllParticipationByTestId(int tid);
 	
 }

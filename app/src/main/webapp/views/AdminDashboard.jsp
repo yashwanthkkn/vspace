@@ -108,11 +108,11 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <c:forEach items="${tests}" var="test">
+                      <c:forEach items="${completedtests}" var="test">
                         <c:if test="${test.state == 'end'}">
                       <tr>
                         <td scope="row">
-                          <a href="/admin/result">${test.tname}</a>
+                          <a href="/admin/result/${test.tid}">${test.tname}</a>
                         </td>
                         <td>${test.date}</td>
                         <td>${test.start_time}</td>

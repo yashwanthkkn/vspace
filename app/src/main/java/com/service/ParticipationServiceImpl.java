@@ -53,4 +53,9 @@ public class ParticipationServiceImpl implements ParticipationService {
 		return dao.findAllParticipationByUserId(uid);
 	}
 
+	@Override
+	public List<Participation> findParticipationsByTid(int tid) {
+		return dao.findAllParticipationByTestId(tid);
+	}
+
 }

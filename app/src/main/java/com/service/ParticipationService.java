@@ -18,4 +18,5 @@ public interface ParticipationService {
 	List<Participation> findAllParticipation();
 	
 	List<Participation> findParticipationsByUid(int uid);
+	List<Participation> findParticipationsByTid(int tid);
 }

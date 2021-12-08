@@ -45,4 +45,11 @@ public class ParticipationDAOImpl extends AbstractDAO<ParticipationPk, Participa
 		return (List<Participation>) criteria.add(Restrictions.eq("pk.uid", uid)).list();
 	}
 
+	@Override
+	public List<Participation> findAllParticipationByTestId(int tid) {
+		Criteria criteria = createEntityCriteria();
+		criteria.add(Restrictions.eq("pk.tid", tid));  
+		return (List<Participation>) criteria.add(Restrictions.eq("pk.tid", tid)).list();
+	}
+
 }

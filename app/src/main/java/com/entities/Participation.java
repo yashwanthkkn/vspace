@@ -4,7 +4,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
 @Entity(name="Participation")
-public class Participation {
+public class Participation  {
 	
 	@EmbeddedId
 	private ParticipationPk pk;
@@ -45,4 +45,6 @@ public class Participation {
 	public void setTotalQn(int totalQn) {
 		this.totalQn = totalQn;
 	}
+
+
 }

@@ -16,13 +16,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.entities.Answer;
+import com.entities.Participation;
+import com.entities.ParticipationPk;
 import com.entities.Question;
 import com.entities.Submission;
 import com.entities.Test;
 import com.entities.User;
+import com.service.ParticipationService;
 import com.service.QuestionService;
 import com.service.SubmissionService;
 import com.service.TestService;
+import com.service.UserService;
+import com.util.UserPart;
 import com.view.ExcelExport;
 
 @Controller
@@ -34,6 +39,11 @@ public class AdminController {
 	QuestionService questionService;
 	@Autowired
 	SubmissionService submissionService;
+	@Autowired
+	ParticipationService participationService;
+	@Autowired
+	UserService userService;
+	List<UserPart> userPart=new ArrayList<UserPart>();
 	
 	@RequestMapping(value="/dashboard",method = RequestMethod.GET)
 	public ModelAndView createTest(ModelAndView mandv,@RequestParam(required = false) String error) {
@@ -42,7 +52,16 @@ public class AdminController {
 			mandv.addObject("msg","Test with the name already exists");
 		}
 		List<Test> tests = testService.findAllTests();
-		mandv.addObject("tests",tests);
+		List<Test> completedTest=new ArrayList<Test>();
+		Iterator<Test> itr = tests.iterator();
+		while(itr.hasNext()) {
+			Test temp = itr.next();
+			if(temp.getState().equals("end")) {
+				completedTest.add(temp); 
+			}
+		}
+		mandv.addObject("completedtests",completedTest);
+		mandv.addObject("tests", tests);
 		mandv.addObject("test",new Test());
 		mandv.setViewName("AdminDashboard");
 		return mandv;
@@ -95,9 +114,33 @@ public class AdminController {
 		return "redirect:/admin/test/"+tid;
 	}
 	
-	@RequestMapping(value="/result",method = RequestMethod.GET)
-	public String result() {
-		return "AdminResult";
+	@RequestMapping(value="/result/{tid}",method = RequestMethod.GET)
+	public ModelAndView result(ModelAndView mandv,@PathVariable int tid) {
+		ParticipationPk pk=new ParticipationPk();
+		pk.setTid(tid);
+		List<Participation> participations=participationService.findParticipationsByTid(tid);
+		//List<UserPart> userPart=new ArrayList<UserPart>();
+		Iterator<Participation> itr=participations.iterator();
+		while(itr.hasNext()) {
+			Participation temp=itr.next();
+			int uid=temp.getPk().getUid();
+			User user=userService.findById(uid);
+			UserPart up=new UserPart(user,temp);
+			userPart.add(up);
+		}
+		Iterator<UserPart> itr1=userPart.iterator();
+		while(itr1.hasNext()) {
+			UserPart s=itr1.next();
+			System.out.println(s.toString());
+		}
+		
+		
+		//int uid=part.getPk().getUid();
+		//User users=userService.findById(uid);
+		//UserPart userPart=new UserPart(users, part);
+		mandv.addObject("users",userPart);
+		mandv.setViewName("AdminResult");
+		return mandv;
 	}
 	
 	@RequestMapping(value="/test/{tid}/start",method = RequestMethod.GET)
@@ -130,8 +173,8 @@ public class AdminController {
 	public ModelAndView exportToExcel() {
 		ModelAndView mandv=new ModelAndView();
 		mandv.setView(new ExcelExport());
-		List<Submission> list=submissionService.findAllSubmissions();
-		mandv.addObject("list",list);
+		//List<Submission> list=submissionService.findAllSubmissions();
+		mandv.addObject("list",userPart);
 		return mandv;
 	}
 }
