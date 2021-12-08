@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.razorpay.Order;
 import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
+import com.util.PaymentUtils;
 import com.util.RazorPay;
 import com.util.Response;
 
@@ -44,7 +45,7 @@ public class PaymentServiceImpl implements PaymentService {
 		razorPay.setSecretKey(SECRET_ID);
 		razorPay.setImageURL("/logo");
 		razorPay.setTheme("#F37254");
-		razorPay.setNotes("notes"+orderId);
+		razorPay.setNotes(orderId);
 		
 		return razorPay;
 	}
@@ -69,5 +70,14 @@ public class PaymentServiceImpl implements PaymentService {
 		BigDecimal value = b.multiply(new BigDecimal("100"));
 		return value.setScale(0, RoundingMode.UP).toString();
 		 
+	}
+	
+	public Boolean check(JSONObject options) {
+		try {
+			return PaymentUtils.verifyPaymentSignature(options,this.SECRET_KEY);
+		} catch (RazorpayException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 }

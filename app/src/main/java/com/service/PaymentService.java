@@ -1,5 +1,7 @@
 package com.service;
 
+import org.json.JSONObject;
+
 import com.entities.Test;
 import com.entities.User;
 import com.razorpay.Order;
@@ -11,4 +13,5 @@ public interface PaymentService {
 	RazorPay getRazorPay(String orderId, Test test, User user);
 	Order createRazorPayOrder(String amount);
 	String convertRupeeToPaise(String paise);
+	public Boolean check(JSONObject options);
 }

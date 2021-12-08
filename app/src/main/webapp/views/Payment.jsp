@@ -103,12 +103,12 @@
 		    "description": "",
 		    "image": "",
 		    "order_id":"",
-		    "handler": function (response){
-		    	alert(response.razorpay_payment_id); /* use this razorpay_payment_id for feature reference to this order */
-		    	$('#msform')[0].reset();
-		    	$('#pay-success').show();
+		    // "handler": function (response){
+		    // 	alert(response.razorpay_payment_id); /* use this razorpay_payment_id for feature reference to this order */
+		    // 	$('#msform')[0].reset();
+		    // 	$('#pay-success').show();
 		    	
-		    },
+		    // },
 		    "prefill": {
 		        "name": "",
 		        "email": ""
@@ -118,7 +118,9 @@
 		    },
 		    "theme": {
 		        "color": ""
-		    }
+		    },
+			"callback_url":"",
+  			"redirect": true
 		};
 		
 
@@ -138,6 +140,7 @@
 				options.prefill.email = resp.razorPay.customerEmail;
 				options.notes.address = resp.razorPay.notes;
 				options.theme.color = resp.razorPay.theme;
+				options.callback_url = "http://localhost:8080/payment/test/${tid}/callback"
 				var rzp1 = new Razorpay(options);
 				rzp1.open();
 				e.preventDefault();
