@@ -35,6 +35,7 @@ public class ParticipationServiceImpl implements ParticipationService {
 			entity.setScore(participation.getScore());
 			entity.setLast_attempted(participation.getLast_attempted());
 			entity.setTotalQn(participation.getTotalQn());
+			entity.setPaymentDone(participation.isPaymentDone());
 		}
 	}
 

@@ -10,6 +10,9 @@ public class TestPart {
 		this.test = t;
 		this.participation = p;
 	}
+	public TestPart(Test t) {
+		this.test = t;
+	}
 	public Participation getParticipation() {
 		return participation;
 	}

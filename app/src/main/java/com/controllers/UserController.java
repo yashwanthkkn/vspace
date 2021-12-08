@@ -57,7 +57,7 @@ public class UserController {
 		List<Test> liveTest = new ArrayList<Test>();
 		List<Test> endTest = new ArrayList<Test>();
 		List<Participation> participations = participationService.findParticipationsByUid(user.getUid());
-		List<Test> currentTest = new ArrayList<Test>();
+		List<TestPart> currentTest = new ArrayList<TestPart>();
 		List<TestPart> completedTest = new ArrayList<TestPart>();
 		Iterator<Test> itr = tests.iterator();
 		while(itr.hasNext()) {
@@ -80,12 +80,19 @@ public class UserController {
 						completedTest.add(tp);
 					}else {
 						// not completed
-						currentTest.add(liveTest.get(j));
+						Test t = liveTest.get(i);
+						Participation p = participations.get(j);
+						TestPart tp = new TestPart(t,p);
+						currentTest.add(tp);
 					}
 				}
 			}
 			if(flag == 0) {
-				currentTest.add(liveTest.get(i));
+				Test t = liveTest.get(i);
+				Participation p = new Participation();
+				TestPart tp = new TestPart(t,p);
+				
+				currentTest.add(tp);
 			}
 		}
 		itr =tests.iterator();
@@ -109,16 +116,16 @@ public class UserController {
 				}
 			}
 		}
-		System.out.println("Current test");
-		itr = currentTest.iterator();
-		while(itr.hasNext()) {
-			System.out.println(itr.next());
-		}
-		System.out.println("Completed test");
-		Iterator<TestPart> itr1 = completedTest.iterator();
-		while(itr1.hasNext()) {
-			TestPart t = itr1.next();
-		}
+//		System.out.println("Current test");
+//		Iterator<TestPart> itr1 = currentTest.iterator();
+//		while(itr.hasNext()) {
+//			System.out.println(itr.next());
+//		}
+//		System.out.println("Completed test");
+//		itr1 = completedTest.iterator();
+//		while(itr1.hasNext()) {
+//			TestPart t = itr1.next();
+//		}
 		mandv.addObject("tests",tests);
 		mandv.addObject("user",user);
 		mandv.addObject("currentTest",currentTest);
@@ -253,5 +260,16 @@ public class UserController {
 			return "redirect:/user/dashboard";
 		}
 		return "redirect:/user/test/"+tid+"/qn";
+	}
+	
+	@RequestMapping(value = "/test/{tid}/payment",method = RequestMethod.GET)
+	public ModelAndView payment(ModelAndView mandv,@PathVariable int tid) {
+		Test test = testService.findById(tid);
+		if(!test.isNeedPayment()) {
+			return new ModelAndView("redirect:/user/dashboard");
+		}
+		mandv.addObject("test",test);
+		mandv.setViewName("Payment");
+		return mandv;
 	}
 }

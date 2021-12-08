@@ -35,6 +35,8 @@ public class TestServiceImpl implements TestService{
 			entity.setTname(test.getTname());
 			entity.setState(test.getState());
 			entity.setTotalMarks(test.getTotalMarks());
+			entity.setNeedPayment(test.isNeedPayment());
+			entity.setAmount(test.getAmount());
 		}
 		
 	}
