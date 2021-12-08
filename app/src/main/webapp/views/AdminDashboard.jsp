@@ -84,8 +84,15 @@
 
         <div class="row mt-5 px-5">
             <div class="col-12">
+              <div class="d-flex justify-content-between">
                 <div class="h5">Completed</div>
+                <div>
+                  <a href="/admin/excelExport" class="btn btn-success">Export data into Excel 
+                    <i class="fa fa-file-excel-o" aria-hidden="true"></i></a> 
+                  </button>
+                </div>
             </div>
+          </div>
         </div>
 
         <div class="row px-5">

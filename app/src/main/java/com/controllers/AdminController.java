@@ -17,10 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.entities.Answer;
 import com.entities.Question;
+import com.entities.Submission;
 import com.entities.Test;
 import com.entities.User;
 import com.service.QuestionService;
+import com.service.SubmissionService;
 import com.service.TestService;
+import com.view.ExcelExport;
 
 @Controller
 @RequestMapping("admin")
@@ -29,6 +32,8 @@ public class AdminController {
 	TestService testService;
 	@Autowired
 	QuestionService questionService;
+	@Autowired
+	SubmissionService submissionService;
 	
 	@RequestMapping(value="/dashboard",method = RequestMethod.GET)
 	public ModelAndView createTest(ModelAndView mandv,@RequestParam(required = false) String error) {
@@ -120,5 +125,13 @@ public class AdminController {
 		test.setState("end");
 		testService.updateTest(test);
 		return "redirect:/admin/dashboard";
+	}
+	@RequestMapping(value="/excelExport",method = RequestMethod.GET)
+	public ModelAndView exportToExcel() {
+		ModelAndView mandv=new ModelAndView();
+		mandv.setView(new ExcelExport());
+		List<Submission> list=submissionService.findAllSubmissions();
+		mandv.addObject("list",list);
+		return mandv;
 	}
 }
