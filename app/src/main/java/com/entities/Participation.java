@@ -6,7 +6,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
 @Entity(name="Participation")
-public class Participation  implements Serializable,Comparable<Participation>{
+public class Participation  implements Serializable{
 	
 	@EmbeddedId
 	private ParticipationPk pk;
@@ -15,14 +15,7 @@ public class Participation  implements Serializable,Comparable<Participation>{
 	private int score;
 	private int totalQn;
 	private boolean paymentDone;
-
-	public boolean isPaymentDone() {
-		return paymentDone;
-	}
-
-	public void setPaymentDone(boolean paymentDone) {
-		this.paymentDone = paymentDone;
-	}
+	
 	public Participation() {
 	
 	}
@@ -56,9 +49,12 @@ public class Participation  implements Serializable,Comparable<Participation>{
 		this.totalQn = totalQn;
 	}
 
-	@Override
-	public int compareTo(Participation o) {
-		return this.score > o.score ? 1 :0;
+	public boolean isPaymentDone() {
+		return paymentDone;
+	}
+
+	public void setPaymentDone(boolean paymentDone) {
+		this.paymentDone = paymentDone;
 	}
 
 

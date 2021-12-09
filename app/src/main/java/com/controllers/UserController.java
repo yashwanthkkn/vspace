@@ -1,13 +1,20 @@
 package com.controllers;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +36,10 @@ import com.service.QuestionService;
 import com.service.SubmissionService;
 import com.service.TestService;
 import com.service.UserService;
+import com.util.Report;
+import com.util.ReportHelper;
 import com.util.TestPart;
+import com.view.ExportPdf;
 @Controller
 @RequestMapping("user")
 public class UserController {
@@ -45,6 +55,7 @@ public class UserController {
 	AnswerService answerService;
 	@Autowired
 	SubmissionService submissionService;
+	
 	
 	@RequestMapping(value="/dashboard", method=RequestMethod.GET)
 	public ModelAndView processLoginPage(ModelAndView mandv,Principal principal) {
@@ -272,4 +283,25 @@ public class UserController {
 		mandv.setViewName("Payment");
 		return mandv;
 	}
+	
+
+	@RequestMapping(value = "/exportpdf/{tid}/{uid}",produces = MediaType.APPLICATION_PDF_VALUE)
+	public ResponseEntity<InputStreamResource> employeeReports(HttpServletResponse response,@PathVariable int tid,@PathVariable int uid) throws IOException {
+		ReportHelper reportHelper=new ReportHelper();
+		List<Report> report = reportHelper.getReport(tid,uid);
+		Iterator<Report> itr=report.iterator();
+		while(itr.hasNext()) {
+			System.out.println(itr.next());
+		}
+	/*	List<Question> report=questionService.findQuestionsByTid(tid);*/
+		ByteArrayInputStream bis = ExportPdf.reportsReport(report);
+
+		HttpHeaders headers = new HttpHeaders();
+
+		headers.add("Content-Disposition", "attachment;filename=testreport.pdf");
+
+		return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
+				.body(new InputStreamResource(bis));
+	}
+	
 }

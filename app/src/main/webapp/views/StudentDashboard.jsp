@@ -123,7 +123,7 @@
                     <tbody>
                       <c:forEach items="${completedTest}" var="test">
                       <tr>
-                        <td scope="row"><a href="#">${test.test.tname}</a></td>
+                        <td scope="row"><a href="/user/exportpdf/${test.test.tid}/${test.participation.pk.uid}">${test.test.tname}</a></td>
                         <td>${test.test.date}</td>
                         <td>${test.test.totalMarks}</td>
                         <td>${test.participation.score}</td>

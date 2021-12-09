@@ -17,7 +17,7 @@
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
             </ul>
-            <a href="/logout">
+            <a href="/login">
               <button class="btn btn-outline-primary btn-sm" type="submit">Logout</button>
             </a>
             

@@ -3,34 +3,32 @@ package com.util;
 import java.util.List;
 
 import com.entities.Participation;
+import com.entities.Question;
 import com.entities.Submission;
 import com.entities.Test;
 
 public class Report {
-	private Test test;
-	private Participation participation;
-	private List<Submission> submission;
-	public final void setSubmission(List<Submission> submission) {
+	private Submission submission;
+	private Question question;
+	public final Submission getSubmission() {
+		return submission;
+	}
+	public final void setSubmission(Submission submission) {
 		this.submission = submission;
 	}
-	public Test getTest() {
-		return test;
+	public final Question getQuestion() {
+		return question;
 	}
-	public void setTest(Test test) {
-		this.test = test;
+	public final void setQuestion(Question question) {
+		this.question = question;
 	}
-	public Participation getParticipation() {
-		return participation;
-	}
-	public void setParticipation(Participation participation) {
-		this.participation = participation;
-	}
-	
-	public Report(Test test, Participation participation, List<Submission> submission) {
+	public Report(Submission submission, Question question) {
 		super();
-		this.test = test;
-		this.participation = participation;
 		this.submission = submission;
+		this.question = question;
+	}
+	public Report() {
+		
 	}
 	
 	
