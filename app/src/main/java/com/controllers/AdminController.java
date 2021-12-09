@@ -2,6 +2,7 @@ package com.controllers;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -128,6 +129,7 @@ public class AdminController {
 			UserPart up=new UserPart(user,temp);
 			userPart.add(up);
 		}
+		Collections.sort(userPart);
 		Iterator<UserPart> itr1=userPart.iterator();
 		while(itr1.hasNext()) {
 			UserPart s=itr1.next();
@@ -173,6 +175,7 @@ public class AdminController {
 	public ModelAndView exportToExcel() {
 		ModelAndView mandv=new ModelAndView();
 		mandv.setView(new ExcelExport());
+		
 		//List<Submission> list=submissionService.findAllSubmissions();
 		mandv.addObject("list",userPart);
 		return mandv;

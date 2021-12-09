@@ -3,7 +3,7 @@ package com.util;
 import com.entities.Participation;
 import com.entities.User;
 
-public class UserPart {
+public class UserPart implements Comparable<UserPart>{
 	private User user;
 	private Participation participation;
 	
@@ -27,6 +27,10 @@ public class UserPart {
 	}
 	public void setParticipation(Participation participation) {
 		this.participation = participation;
+	}
+	@Override
+	public int compareTo(UserPart o) {
+		return this.getParticipation().getScore() > o.getParticipation().getScore() ? 1:0;
 	}
 	
 }
