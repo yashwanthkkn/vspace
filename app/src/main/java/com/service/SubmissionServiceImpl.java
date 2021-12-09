@@ -39,4 +39,9 @@ public class SubmissionServiceImpl implements SubmissionService {
 		return dao.findAllSubmissionss();
 	}
 
+	@Override
+	public List<Submission> findSubmissionsById(SubmissionPk pk) {
+		return dao.findSubmissionsById(pk);
+	}
+
 }

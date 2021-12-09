@@ -99,7 +99,7 @@
                     <tbody>
                       <c:forEach items="${completedTest}" var="test">
                       <tr>
-                        <td scope="row">${test.test.tname}</td>
+                        <td scope="row"><a href="#">${test.test.tname}</a></td>
                         <td>${test.test.date}</td>
                         <td>${test.test.totalMarks}</td>
                         <td>${test.participation.score}</td>

@@ -13,4 +13,5 @@ public interface SubmissionsDAO {
     void deleteSubmission(Submission submission);
      
     List<Submission> findAllSubmissionss();
+    List<Submission> findSubmissionsById(SubmissionPk pk);
 }

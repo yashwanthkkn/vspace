@@ -37,4 +37,10 @@ public class SubmissionsDAOImpl extends AbstractDAO<SubmissionPk, Submission> im
         return (List<Submission>) criteria.list();
 	}
 
+	@Override
+	public List<Submission> findSubmissionsById(SubmissionPk pk) {
+		Criteria criteria = createEntityCriteria();
+        return (List<Submission>) getByKey(pk);
+	}
+
 }

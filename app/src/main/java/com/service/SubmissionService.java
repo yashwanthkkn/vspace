@@ -10,4 +10,5 @@ public interface SubmissionService {
 	void saveSubmission(Submission submission);
 	void deleteSubmission(Submission submission);
 	List<Submission> findAllSubmissions();
+	List<Submission> findSubmissionsById(SubmissionPk pk);
 }

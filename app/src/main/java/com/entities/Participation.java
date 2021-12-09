@@ -1,10 +1,12 @@
 package com.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
 @Entity(name="Participation")
-public class Participation  {
+public class Participation  implements Serializable{
 	
 	@EmbeddedId
 	private ParticipationPk pk;
