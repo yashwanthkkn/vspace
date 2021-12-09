@@ -45,7 +45,7 @@ public class ExcelExport extends AbstractXlsxView {
            row.createCell(0).setCellValue(spec.getUser().getName());
            row.createCell(1).setCellValue(spec.getUser().getEmailid());
            row.createCell(2).setCellValue(spec.getParticipation().getScore());
-           row.createCell(3).setCellValue(spec.getParticipation().getTotalQn());
+           row.createCell(3).setCellValue(spec.getRank());
            
        }
     }

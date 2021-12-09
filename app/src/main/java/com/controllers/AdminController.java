@@ -44,7 +44,7 @@ public class AdminController {
 	ParticipationService participationService;
 	@Autowired
 	UserService userService;
-	List<UserPart> userPart=new ArrayList<UserPart>();
+//	List<UserPart> userPart=new ArrayList<UserPart>();
 	
 	@RequestMapping(value="/dashboard",method = RequestMethod.GET)
 	public ModelAndView createTest(ModelAndView mandv,@RequestParam(required = false) String error) {
@@ -125,7 +125,7 @@ public class AdminController {
 		ParticipationPk pk=new ParticipationPk();
 		pk.setTid(tid);
 		List<Participation> participations=participationService.findParticipationsByTid(tid);
-		//List<UserPart> userPart=new ArrayList<UserPart>();
+		ArrayList<UserPart> userPart=new ArrayList<UserPart>();
 		Iterator<Participation> itr=participations.iterator();
 		while(itr.hasNext()) {
 			Participation temp=itr.next();
@@ -134,17 +134,14 @@ public class AdminController {
 			UserPart up=new UserPart(user,temp);
 			userPart.add(up);
 		}
-		Collections.sort(userPart);
+		Collections.sort(userPart,Collections.reverseOrder());
 		Iterator<UserPart> itr1=userPart.iterator();
+		int rank=1;
 		while(itr1.hasNext()) {
 			UserPart s=itr1.next();
-			System.out.println(s.toString());
+			s.setRank(rank++);
 		}
-		
-		
-		//int uid=part.getPk().getUid();
-		//User users=userService.findById(uid);
-		//UserPart userPart=new UserPart(users, part);
+		mandv.addObject("tid",tid);
 		mandv.addObject("users",userPart);
 		mandv.setViewName("AdminResult");
 		return mandv;
@@ -176,12 +173,28 @@ public class AdminController {
 		testService.updateTest(test);
 		return "redirect:/admin/dashboard";
 	}
-	@RequestMapping(value="/excelExport",method = RequestMethod.GET)
-	public ModelAndView exportToExcel() {
-		ModelAndView mandv=new ModelAndView();
+	@RequestMapping(value="/excelExport/{tid}",method = RequestMethod.GET)
+	public ModelAndView exportToExcel(ModelAndView mandv,@PathVariable int tid) {
+		ParticipationPk pk=new ParticipationPk();
+		pk.setTid(tid);
+		List<Participation> participations=participationService.findParticipationsByTid(tid);
+		ArrayList<UserPart> userPart=new ArrayList<UserPart>();
+		Iterator<Participation> itr=participations.iterator();
+		while(itr.hasNext()) {
+			Participation temp=itr.next();
+			int uid=temp.getPk().getUid();
+			User user=userService.findById(uid);
+			UserPart up=new UserPart(user,temp);
+			userPart.add(up);
+		}
+		Collections.sort(userPart,Collections.reverseOrder());
+		Iterator<UserPart> itr1=userPart.iterator();
+		int rank=1;
+		while(itr1.hasNext()) {
+			UserPart s=itr1.next();
+			s.setRank(rank++);
+		}
 		mandv.setView(new ExcelExport());
-		
-		//List<Submission> list=submissionService.findAllSubmissions();
 		mandv.addObject("list",userPart);
 		return mandv;
 	}

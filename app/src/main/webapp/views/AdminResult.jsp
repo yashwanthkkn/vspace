@@ -44,7 +44,7 @@
             <div class="col-12">
                 <div class="d-flex justify-content-between">
                     <div class="h5">Test : <span class="text-primary">KEC</span></div>
-                    <div> <a href="/admin/excelExport" class="btn btn-success"><i class="fas fa-download"></i> Download Result</a></div>
+                    <div> <a href="/admin/excelExport/${tid}" class="btn btn-success"><i class="fas fa-download"></i> Download Result</a></div>
                 </div>
             </div>
         </div>
@@ -61,12 +61,12 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <c:forEach items="${users}" var="users">
+                      <c:forEach items="${users}" var="users" varStatus="loop">
                       <tr>
                         <td scope="row">${users.user.name}</td>
                         <td>${users.user.emailid}</td>
                         <td>${users.participation.score}</td>
-                        <td>1</td>
+                        <td>${loop.index+1}</td>
                       </tr>
                      </c:forEach>
                     </tbody>
