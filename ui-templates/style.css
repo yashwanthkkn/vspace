@@ -21,3 +21,22 @@ a{
     height: 100px;
     width: 100px;
   }
+
+  .nav-btn{
+      position: fixed;
+      top: 40%;
+      right: 0;
+      z-index: 100;
+  }
+
+  .inner-nav-btn{
+    position: relative;
+    bottom: 55%;
+    left: 0;
+    z-index: 100;
+    width: 25px;
+}
+
+.circle{
+    border-radius: 50%;
+}
