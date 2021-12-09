@@ -17,7 +17,7 @@
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
             </ul>
-            <a href="/login">
+            <a href="/logout">
               <button class="btn btn-outline-primary btn-sm" type="submit">Logout</button>
             </a>
           </div>
@@ -67,6 +67,9 @@
                           <a href="/admin/test/${test.tid}">${test.tname}</a>
                           <c:if test="${test.state == 'start'}">
                             <span class="badge rounded-pill bg-success">live</span>
+                          </c:if>
+                          <c:if test="${test.needPayment == 'true'}">
+                            <span class="badge rounded-pill bg-primary">Rs ${test.amount}</span>
                           </c:if>
                         </td>
                         <td>${test.date}</td>
@@ -148,23 +151,18 @@
                     <spring:input type="time" path="start_time" class="form-control form-control-sm" id="time" />
                 </div>
                 <div class="mb-3">
-                    <label for="duration" class="form-label">Duration</label>
-                    <spring:input placeholder="eg. 1 hr" type="text" path="duration" class="form-control form-control-sm" id="duration" />
+                    <label for="duration" class="form-label">Duration </label>
+                    <spring:input type='text' placeholder="eg. 1 hr" path="duration" class="form-control form-control-sm" id="duration" />
+                </div>
+                <div class="mb-3">
+                  <label for="duration" class="form-label">Payment (in Rs)</label>
+                  <spring:input type='text' placeholder="eg. 1 hr" path="amount" class="form-control form-control-sm" id="duration" />
+                  <small class="mt-1 text-secondary">Leave empty if you don't want have any fee to take this test</small>
                 </div>
                 <button type="submit" class="btn btn-primary btn-sm px-5">Create Test</button>
               </spring:form>
         </div>
       </div>
   </div>
-  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
-      <img src="..." class="rounded me-2" alt="...">
-      <strong class="me-auto">Bootstrap</strong>
-      <small>11 mins ago</small>
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body">
-      Hello, world! This is a toast message.
-    </div>
-  </div>
+  
 <jsp:include page="Footer.jsp" />

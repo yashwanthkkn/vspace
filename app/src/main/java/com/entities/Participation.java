@@ -14,7 +14,15 @@ public class Participation  implements Serializable,Comparable<Participation>{
 	private int last_attempted;
 	private int score;
 	private int totalQn;
-	
+	private boolean paymentDone;
+
+	public boolean isPaymentDone() {
+		return paymentDone;
+	}
+
+	public void setPaymentDone(boolean paymentDone) {
+		this.paymentDone = paymentDone;
+	}
 	public Participation() {
 	
 	}

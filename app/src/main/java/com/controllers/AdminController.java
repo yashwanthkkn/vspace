@@ -72,6 +72,11 @@ public class AdminController {
 	
 		Test temp = testService.findTestByTestName(test.getTname());
 		if(temp == null) {
+			if(test.getAmount() == 0) {
+				test.setNeedPayment(false);
+			}else {
+				test.setNeedPayment(true);
+			}
 			testService.saveTest(test);
 			return new ModelAndView("redirect:/admin/dashboard");
 		}else {

@@ -22,6 +22,8 @@ public class Test {
 	private String start_time;
 	private String date;
 	private int totalMarks;
+	private int amount;
+	private boolean needPayment;
 	
 	@OneToMany(mappedBy = "test",cascade = CascadeType.ALL)
 	private List<Question> questions;
@@ -90,6 +92,18 @@ public class Test {
 	}
 	public void setTotalMarks(int totalMarks) {
 		this.totalMarks = totalMarks;
+	}
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+	public boolean isNeedPayment() {
+		return needPayment;
+	}
+	public void setNeedPayment(boolean needPayment) {
+		this.needPayment = needPayment;
 	}
 	
 

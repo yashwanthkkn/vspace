@@ -17,9 +17,9 @@
                   <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
               </ul>
-              <a href="/login">
-              <button class="btn btn-outline-primary btn-sm" type="submit">Logout</button>
-            </a>
+              <a href="/logout">
+                <button class="btn btn-outline-primary btn-sm" type="submit">Logout</button>
+              </a>
             </div>
           </div>
       </nav>
@@ -57,18 +57,42 @@
                     <tbody>
                       <c:forEach items="${currentTest}" var="test">
                           <tr>
-                            <td scope="row"> ${test.tname}</td>
-                            <td>${test.date}</td>
-                            <td>${test.start_time}</td>
-                            <td>${test.duration}</td>
+                            <td scope="row"> ${test.test.tname}</td>
+                            <td>${test.test.date}</td>
+                            <td>${test.test.start_time}</td>
+                            <td>${test.test.duration}</td>
                             <td>30</td>
-                            <td> 
-                              <div>
-                                <a href="/user/test/${test.tid}/start">
-                                  <button class="btn btn-primary btn-sm"><i class="fab fa-cloudscale"></i> Start Test</button>
-                                </a>
-                              </div>
-                            </td>
+                            <c:if test="${test.test.needPayment == 'false'}">
+                              <td> 
+                                <div>
+                                  <a href="/user/test/${test.test.tid}/start">
+                                    <button class="btn btn-primary btn-sm"><i class="fab fa-cloudscale"></i> Start Test</button>
+                                  </a>
+                                </div>
+                              </td>
+                            </c:if>
+                            <c:if test="${test.test.needPayment == 'true'}">
+                             
+                              <c:if test="${test.participation.paymentDone == 'false'}">
+                                <td> 
+                                  <div>
+                                    <a href="/user/test/${test.test.tid}/payment">
+                                      <button class="btn btn-warning btn-sm text-white"><i class="fas fa-rupee-sign"></i> Pay ${test.test.amount}</button>
+                                    </a>
+                                  </div>
+                                </td>
+                              </c:if>
+                              <c:if test="${test.participation.paymentDone == 'true'}">
+                                <td> 
+                                  <div>
+                                    <a href="/user/test/${test.test.tid}/start">
+                                      <button class="btn btn-primary btn-sm"><i class="fab fa-cloudscale"></i> Start Test</button>
+                                    </a>
+                                  </div>
+                                </td>
+                              </c:if>
+                            </c:if>
+                            
                           </tr>
                     </c:forEach>
                     </tbody>
@@ -111,4 +135,5 @@
             </div>
         </div>
     </div>
+
 <jsp:include page="Footer.jsp" />
