@@ -7,6 +7,7 @@ import javax.persistence.Id;
 
 @Entity(name = "User")
 public class User {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int uid;
@@ -16,6 +17,17 @@ public class User {
 	private boolean emailVerified=false;
 	private String claim="user";
 	private int last_attempted;  
+	
+	public User(String name, String password, String emailid) {
+		super();
+		this.name = name;
+		this.password = password;
+		this.emailid = emailid;
+	}
+	
+	public User() {
+		
+	}
 	
 	public boolean isEmailVerified() {
 		return emailVerified;
@@ -54,19 +66,11 @@ public class User {
 	public void setEmailid(String emailid) {
 		this.emailid = emailid;
 	}
+	
 	@Override
 	public String toString() {
 		return "User [uid=" + uid + ", name=" + name + ", password=" + password + ", emailid=" + emailid
 				+ ", emailVerified=" + emailVerified + ", claim=" + claim + "]";
-	}
-	public User(String name, String password, String emailid) {
-		super();
-		this.name = name;
-		this.password = password;
-		this.emailid = emailid;
-	}
-	public User() {
-		
 	}
 	public int getLast_attempted() {
 		return last_attempted;

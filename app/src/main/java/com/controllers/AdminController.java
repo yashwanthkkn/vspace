@@ -34,24 +34,31 @@ import com.view.ExcelExport;
 @Controller
 @RequestMapping("admin")
 public class AdminController {
+	
 	@Autowired
 	TestService testService;
+	
 	@Autowired
 	QuestionService questionService;
+	
 	@Autowired
 	SubmissionService submissionService;
+	
 	@Autowired
 	ParticipationService participationService;
+	
 	@Autowired
 	UserService userService;
-//	List<UserPart> userPart=new ArrayList<UserPart>();
+
 	
 	@RequestMapping(value="/dashboard",method = RequestMethod.GET)
 	public ModelAndView createTest(ModelAndView mandv,@RequestParam(required = false) String error) {
+
 		mandv.addObject("msg","");
 		if(error != null) {
 			mandv.addObject("msg","Test with the name already exists");
 		}
+		
 		List<Test> tests = testService.findAllTests();
 		List<Test> completedTest=new ArrayList<Test>();
 		Iterator<Test> itr = tests.iterator();
@@ -66,7 +73,10 @@ public class AdminController {
 		mandv.addObject("test",new Test());
 		mandv.setViewName("AdminDashboard");
 		return mandv;
+	
 	}
+	
+	
 	@RequestMapping(value="/dashboard",method=RequestMethod.POST)
 	public ModelAndView processTest(Test test,ModelAndView mandv) {
 	
@@ -82,10 +92,13 @@ public class AdminController {
 		}else {
 			return new ModelAndView("redirect:/admin/dashboard?error");
 		}
+	
 	}
+	
 	
 	@RequestMapping(value="/test/{id}",method = RequestMethod.GET)
 	public ModelAndView test(ModelAndView mandv, @PathVariable int id) {
+	
 		Test test = testService.findById(id);
 		Question question = new Question();
 		List<Question> questions = questionService.findQuestionsByTid(id);
@@ -99,10 +112,13 @@ public class AdminController {
 		mandv.addObject("questions",questions);
 		mandv.setViewName("AdminQuestion");
 		return mandv;
+	
 	}
+	
 	
 	@RequestMapping(value="/test/{tid}/qn",method = RequestMethod.POST)
 	public String postQuestion(Question question,@PathVariable int tid) {
+	
 		Test test = testService.findById(tid);
 		question.setTest(test);
 		question.setAnswer(question.getOptions().get(Integer.parseInt(question.getAnswer())).getAnswer());
@@ -112,16 +128,22 @@ public class AdminController {
 		}
 		questionService.saveQuestion(question);
 		return "redirect:/admin/test/"+tid;
+	
 	}
+	
 	
 	@RequestMapping(value="/test/{tid}/qn/{qid}/d",method = RequestMethod.GET)
 	public String deleteQuestion(@PathVariable int tid,@PathVariable int qid) {
+	
 		questionService.deleteQuestionById(qid);
 		return "redirect:/admin/test/"+tid;
+	
 	}
+	
 	
 	@RequestMapping(value="/result/{tid}",method = RequestMethod.GET)
 	public ModelAndView result(ModelAndView mandv,@PathVariable int tid) {
+	
 		ParticipationPk pk=new ParticipationPk();
 		pk.setTid(tid);
 		Test test = testService.findById(tid);
@@ -146,10 +168,13 @@ public class AdminController {
 		mandv.addObject("users",userPart);
 		mandv.setViewName("AdminResult");
 		return mandv;
+	
 	}
+	
 	
 	@RequestMapping(value="/test/{tid}/start",method = RequestMethod.GET)
 	public String startTest(@PathVariable int tid) {
+	
 		Test test = testService.findById(tid);
 		test.setState("start");
 		int idx = 1;
@@ -165,17 +190,24 @@ public class AdminController {
 		test.setTotalMarks(totalMark);
 		testService.updateTest(test);
 		return "redirect:/admin/test/"+tid;
+	
 	}
+	
 	
 	@RequestMapping(value="/test/{tid}/end",method = RequestMethod.GET)
 	public String endTest(@PathVariable int tid) {
+	
 		Test test = testService.findById(tid);
 		test.setState("end");
 		testService.updateTest(test);
 		return "redirect:/admin/dashboard";
+	
 	}
+	
+	
 	@RequestMapping(value="/excelExport/{tid}",method = RequestMethod.GET)
 	public ModelAndView exportToExcel(ModelAndView mandv,@PathVariable int tid) {
+	
 		ParticipationPk pk=new ParticipationPk();
 		pk.setTid(tid);
 		List<Participation> participations=participationService.findParticipationsByTid(tid);
@@ -198,5 +230,6 @@ public class AdminController {
 		mandv.setView(new ExcelExport());
 		mandv.addObject("list",userPart);
 		return mandv;
+	
 	}
 }

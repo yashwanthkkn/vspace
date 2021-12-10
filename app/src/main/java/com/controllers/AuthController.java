@@ -14,17 +14,16 @@ import org.springframework.web.servlet.ModelAndView;
 import com.entities.User;
 import com.service.UserService;
 
-
-
 @Controller
 public class AuthController {
 	
 	@Autowired
 	private UserService userService;
+	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
-	// GET : /login
+
+
 	@RequestMapping(value="/login",method = RequestMethod.GET)
 	public ModelAndView loadLoginPage(ModelAndView mandv,@RequestParam(required = false) String error) {
 
@@ -35,19 +34,21 @@ public class AuthController {
 		mandv.addObject("user",new User());
 		mandv.setViewName("Login");
 		return mandv;
-
+		
 	}
 
-	// GET : /signup
+
 	@RequestMapping(value="/signup",method = RequestMethod.GET)
 	public ModelAndView loadSignupPage(ModelAndView mandv) {
+
 		mandv.addObject("user",new User());
 		mandv.addObject("msg","");
 		mandv.setViewName("Signup");
 		return mandv;
+
 	}
 	
-	// POST : /signup
+	
 	@RequestMapping(value="/signup",method=RequestMethod.POST)
 	public ModelAndView processSignupPage(User user,ModelAndView mandv) {
 

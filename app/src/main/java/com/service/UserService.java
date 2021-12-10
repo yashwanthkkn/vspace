@@ -5,6 +5,7 @@ import java.util.List;
 import com.entities.User;
 
 public interface UserService {
+	
 	User findById(int uid);
     
     void saveUser(User user);
@@ -17,6 +18,4 @@ public interface UserService {
      
     User findUserByEmailid(String emailid);
  
-   
-
 }
