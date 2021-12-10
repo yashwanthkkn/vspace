@@ -124,6 +124,7 @@ public class AdminController {
 	public ModelAndView result(ModelAndView mandv,@PathVariable int tid) {
 		ParticipationPk pk=new ParticipationPk();
 		pk.setTid(tid);
+		Test test = testService.findById(tid);
 		List<Participation> participations=participationService.findParticipationsByTid(tid);
 		ArrayList<UserPart> userPart=new ArrayList<UserPart>();
 		Iterator<Participation> itr=participations.iterator();
@@ -141,7 +142,7 @@ public class AdminController {
 			UserPart s=itr1.next();
 			s.setRank(rank++);
 		}
-		mandv.addObject("tid",tid);
+		mandv.addObject("test",test);
 		mandv.addObject("users",userPart);
 		mandv.setViewName("AdminResult");
 		return mandv;

@@ -2,28 +2,8 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="Header.jsp" />
-      <nav class="navbar navbar-expand-lg navbar-light bg-light  px-5">
-        <div class="container-fluid">
-            <a class="navbar-brand text-primary" href="#">
-              <i class="fab fa-pied-piper-alt"></i> Vspace
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-            </ul>
-            <a href="/logout">
-              <button class="btn btn-outline-primary btn-sm" type="submit">Logout</button>
-            </a>
-            
-          </div>
-        </div>
-    </nav>
+<jsp:include page="AdminHeader.jsp" />
+
     <div class="container-fluid">      
         <div class="px-5 mt-4">
           <nav aria-label="breadcrumb">
@@ -37,20 +17,20 @@
             <div class="col-12">
                 <div class="d-flex justify-content-between">
                   <div>
-                    <div class="h5">Test : <span class="text-primary">${test.tname}</span></div>
+                    <div class="h5 text-b">Test : <span class="text-primary">${test.tname}</span></div>
                     <small class="text-secondary">Create and edit questions for the test</small>
                   </div>
                     <c:if test="${test.state == 'edit'}">
                       <div>
                         <a href="/admin/test/${test.tid}/start">
-                          <button class="btn btn-primary btn-sm"><i class="fab fa-cloudscale"></i> Start Test</button>
+                          <button class="btn bg-r text-white btn-sm"><i class="fab fa-cloudscale"></i> Start Test</button>
                         </a>
                       </div>
                     </c:if>
                     <c:if test="${test.state == 'start'}">
                       <div>
                         <a href="/admin/test/${test.tid}/end">
-                          <button class="btn btn-danger btn-sm"><i class="fab fa-cloudscale"></i> End Test</button>
+                          <button class="btn bg-r text-white  btn-sm"><i class="fab fa-cloudscale"></i> End Test</button>
                         </a>
                       </div>
                     </c:if>
@@ -61,9 +41,9 @@
         <div class="row mt-5 px-5">
             <div class="col-12">
                 <div class="d-flex justify-content-between">
-                    <div class="h5">Questions</div>
+                    <div class="h5 text-b">Questions</div>
                     <c:if test="${test.state == 'edit'}">
-                      <div><button class="btn btn-primary btn-sm" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <i class="fas fa-plus"></i> Add Question</button></div>
+                      <div><button class="btn text-white bg-b btn-sm" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <i class="fas fa-plus"></i> Add Question</button></div>
                     </c:if>
                 </div>
             </div>
@@ -96,7 +76,7 @@
                               <span class="px-2"></span>
   
                               <a href="/admin/test/${test.tid}/qn/${question.qid}/d">
-                                <button class="btn btn-danger btn-sm">delete</button>
+                                <button class="btn btn-link btn-sm text-r decor-none"><i class="fas fa-trash"></i> delete</button>
                               </a>
                             </td>  
                           </c:if>
@@ -111,12 +91,12 @@
         <!-- MODAL -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">
-              <h5 id="offcanvasRightLabel">Add Question</h5>
+              <h5 id="offcanvasRightLabel text-b">Add Question</h5>
               <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <spring:form name="question" method="POST" action="/admin/test/${test.tid}/qn" modelAttribute="question">
-                    <div class="mb-2">
+                    <div class="mb-1">
                       <label for="question" class="form-label">Question</label>
                       <spring:textarea path="qtext" class="form-control form-control-sm" id="question" />
                     </div>
@@ -150,7 +130,7 @@
                       <label for="mark" class="form-label">Mark</label>
                       <spring:input type="text" path='mark' class="form-control form-control-sm" id="mark" />
                   </div>
-                    <button type="submit" class="btn btn-primary btn-sm px-5"><i class="fas fa-save"></i> Save</button>
+                    <button type="submit" class="btn bg-b text-white btn-sm px-5"><i class="fas fa-save"></i> Save</button>
                   </spring:form>
             </div>
           </div>
