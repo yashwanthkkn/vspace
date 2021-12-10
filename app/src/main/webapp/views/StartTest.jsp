@@ -11,7 +11,7 @@
     <title>Vspace</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/styles/style.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark text-l bg-b  px-5">
@@ -24,8 +24,9 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="me-auto"></div>
-            <button class="btn btn-outline-light btn-sm" type="submit">Logout</button>
-            
+            <a href="/logout">
+                <button class="btn btn-outline-light btn-sm" type="submit">Logout</button>
+            </a>
           </div>
         </div>
     </nav>
@@ -43,10 +44,10 @@
                     <div class="col-3">Total Marks</div>
                 </div>
                 <div class="row mt-3 text-b">
-                    <div class="col-3">KEC_2020</div>
-                    <div class="col-3">12/12/12</div>
-                    <div class="col-3">1.30 hr</div>
-                    <div class="col-3">60</div>
+                    <div class="col-3">${test.tname}</div>
+                    <div class="col-3">${test.start_time}</div>
+                    <div class="col-3">${test.duration}</div>
+                    <div class="col-3">${test.totalMarks}</div>
                 </div>
                 <div class="text-b h5 mt-5">Test Specific Instructions</div>
                 <div class="mt-3">
@@ -57,10 +58,12 @@
             </div>
             <div class="col-5">
                 <div class="px-2 py-4 shadow text-center rounded">
-                    You can start the test now. Wish you luck 😄
-                    <div class="mt-3 d-grid">
-                        <button class="btn btn-block bg-r text-white"><i class="fas fa-play px-2"></i> Start Test</button>
-                    </div>
+                    You can start the test now. Wish you luck ;-)
+                    <a href="/user/test/${tid}/start">
+                        <div class="mt-3 d-grid">
+                            <button class="btn btn-block bg-r text-white"><i class="fas fa-play px-2"></i> Start Test</button>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>

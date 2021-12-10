@@ -10,3 +10,24 @@
     <link rel="stylesheet" href="/styles/style.css">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark text-l bg-b  px-5">
+        <div class="container-fluid">
+          <a class="navbar-brand " href="#">
+            <i class="fab fa-pied-piper-alt px-1"></i> Vspace
+        </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <span class="px-4"></span>
+            <form class="d-flex px-5 w-100">
+              <input class="form-control me-2" type="search" placeholder="Search Tests" aria-label="Search">
+              <button class="btn bg-b text-white btn-sm"  type="submit"><i class="fas fa-search"></i></button>
+            </form>
+            <div class="me-auto"></div>
+            <a href="/logout">
+                <button class="btn btn-outline-light btn-sm" type="submit">Logout</button>
+            </a>
+          </div>
+        </div>
+    </nav>
