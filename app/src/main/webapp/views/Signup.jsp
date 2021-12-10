@@ -12,26 +12,27 @@
   </head>
 <body class="auth-bg-img w-100">
         <div class="d-flex align-items-center justify-content-around">
-            <div class="card px-5 py-3 w-50 mt-3">      
-                <div class="h3 mt-4 text-primary text-center"><i class="fab fa-pied-piper-alt"></i> Vspace</div>
-                <small class="text-secondary text-center">Life's Better </small>             
-                <div class="h5 mt-4 text-secondary text-center">S i g n  U P</div>    
-                         
+            <div class="shadow rounded bg-white px-5 py-3 w-50 mt-3">      
+                <div class="h3 mt-4 text-b text-center"><i class="fab fa-pied-piper-alt"></i> Vspace</div>
+                <div class="text-center"> 
+                    <small class="text-secondary">A better way to Assess </small>             
+                </div>
+                <div class="h5 mt-4 text-d text-center">S i g n  U p</div>              
                 <spring:form class="mt-3" method="POST" action="/signup" modelAttribute="user">
                     <div class="form-group">
-                        <label for="email">Email id</label>
-                        <spring:input type="email"    path="emailid" placeholder="Email" class="form-control" />
+                        <label for="email" class="mb-2 text-secondary">Email id</label>
+                        <spring:input type="email" path="emailid" placeholder="Email" class="form-control" />
                     </div>
                     <div class="form-group mt-4">
-                        <label for="name">Name</label>
-                        <spring:input type="text"            path="name" placeholder="Name" class="form-control"/>
+                        <label for="name" class="mb-2 text-secondary">Name</label>
+                        <spring:input type="text" path="name" placeholder="Your Name" class="form-control"/>
                     </div>
                     <div class="form-group mt-4">
-                        <label for="password">Password</label>
-                        <spring:input type="password"        path="password" placeholder="Password" class="form-control" />
+                        <label for="password" class="mb-2 text-secondary">Password</label>
+                        <spring:input type="password" path="password" placeholder="Password" class="form-control" />
                     </div>
                     <div class="text-center mt-4">
-                        <input class="btn btn-primary btn-sm px-5" type="submit" value="Sign Up" />
+                        <input class="btn bg-b text-white btn-sm px-5" type="submit" value="Sign Up" />
                     </div>
                     <div class="my-2 text-center text-danger">
                         <%= request.getAttribute("msg") %>

@@ -12,24 +12,26 @@
   </head>
 <body class="auth-bg-img w-100 mt-5">
         <div class="d-flex align-items-center justify-content-around">
-            <div class="card px-5 py-3 w-50">
+            <div class="shadow rounded bg-white px-5 py-3 w-50">
                 
-                <div class="h3 mt-4 text-primary text-center"><i class="fab fa-pied-piper-alt"></i> Vspace</div>
-                <small class="text-secondary text-center">Life's Better </small>             
-                <div class="h5 mt-4 text-secondary text-center">L o g i n</div>     
+                <div class="h3 mt-4 text-b text-center"><i class="fab fa-pied-piper-alt"></i> Vspace</div>
+                <div class="text-center"> 
+                    <small class="text-secondary">A better way to Assess </small>             
+                </div>
+                <div class="h5 mt-4 text-d text-center">L o g i n</div>     
         
                 <form class="mt-3" name="login" method="POST" action="/login">
                     <div class="form-group">
-                        <label for="email">Email id</label>
+                        <label for="email" class="mb-2 text-secondary">Email id</label>
                         <input type="email"  name="username" placeholder="Email" class="form-control" />
                     </div>
                     <div class="form-group mt-4">
-                        <label for="password">Password</label>
+                        <label for="password" class="mb-2 text-secondary">Password</label>
                         <input type="password" name="password" placeholder="Password" class="form-control" />
                     </div>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <div class="text-center mt-4">
-                        <input class="btn btn-primary btn-sm px-5" type="submit" value="Login" />
+                        <input class="btn bg-b text-white btn-sm px-5" type="submit" value="Login" />
                     </div>
                     <div class="my-2 text-center text-danger">
                         <%= request.getAttribute("msg") %>

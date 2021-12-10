@@ -9,7 +9,7 @@ a{
 
 .decor-none{
     text-decoration: none;
-    color:#6c757d;
+    color:#2e4057ff;
 }
 
 .auth-bg-img{
@@ -39,4 +39,53 @@ a{
 
 .circle{
     border-radius: 50%;
+}
+
+.text-l{
+    color: #f6d8aeff;;
+}
+
+.text-d{
+   color: #2e4057ff;
+}
+
+.text-b{
+    color: #083d77ff;
+}
+
+.text-r{
+    color: #da4167ff
+}
+
+.text-y{
+    color: #f4d35eff
+}
+
+.bg-l{
+    background-color: #f6d8aeff;;
+}
+
+.bg-d{
+   background-color: #2e4057ff;
+}
+
+.bg-b{
+    background-color: #083d77ff;
+}
+
+.bg-r{
+    background-color: #da4167ff
+}
+
+.bg-y{
+    background-color: #f4d35eff
+}
+
+.text-img{
+    height: inherit;
+    width: inherit;
+    background-image: url("test.jpg");
+    background-position: center;
+    background-size: cover;
+    /* background: radial-gradient(circle, black, white); */
 }
