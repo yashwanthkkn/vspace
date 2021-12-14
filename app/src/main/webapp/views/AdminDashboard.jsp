@@ -70,47 +70,7 @@
           
         </div>
 
-        <div class="row mt-5 px-5">
-            <div class="col-12">
-              <div class="d-flex justify-content-between">
-                <div class="h5 text-b">Completed</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row px-5">
-            <div class="col-12">
-                <table class="table  table-striped">
-                    <thead>
-                      <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Start Time</th>
-                        <th scope="col">Duration</th>
-                        <th scope="col">Questions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-
-                      <c:forEach items="${completedtests}" var="test">
-                        <c:if test="${test.state == 'end'}">
-                          <tr>
-                            <td scope="row">
-                              <a href="/admin/result/${test.tid}">${test.tname}</a>
-                            </td>
-                            <td>${test.date}</td>
-                            <td>${test.start_time}</td>
-                            <td>${test.duration}</td>
-                            <td>30</td>
-                          </tr>
-                        </c:if>
-                     </c:forEach>
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+        
 
     <!-- MODAL -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">

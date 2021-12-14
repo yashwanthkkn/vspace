@@ -35,6 +35,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item text-primary"><a href="/user/dashboard" class="decor-none"> Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="/user/history" class="decor-none">Back</a></li>
           </ol>
         </nav>
       </div>

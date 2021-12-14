@@ -95,6 +95,21 @@ public class AdminController {
 	
 	}
 	
+	@RequestMapping(value = "/history",method = RequestMethod.GET)
+	public ModelAndView History(ModelAndView mandv) {
+		List<Test> tests = testService.findAllTests();
+		List<Test> completedTest=new ArrayList<Test>();
+		Iterator<Test> itr = tests.iterator();
+		while(itr.hasNext()) {
+			Test temp = itr.next();
+			if(temp.getState().equals("end")) {
+				completedTest.add(temp); 
+			}
+		}
+		mandv.addObject("completedtests",completedTest);
+		mandv.setViewName("AdminHistory");
+		return mandv;
+	}
 	
 	@RequestMapping(value="/test/{id}",method = RequestMethod.GET)
 	public ModelAndView test(ModelAndView mandv, @PathVariable int id) {

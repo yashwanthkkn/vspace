@@ -153,6 +153,76 @@ public class UserController {
 	public String testPage() {
 		return "TestPage";
 	}
+	@RequestMapping(value = "/history",method = RequestMethod.GET)
+	public ModelAndView History(ModelAndView mandv,Principal principal) {
+		User user = userService.findUserByEmailid(principal.getName());
+		List<Test> tests = testService.findAllTests();
+		List<Test> liveTest = new ArrayList<Test>();
+		List<Test> endTest = new ArrayList<Test>();
+		List<Participation> participations = participationService.findParticipationsByUid(user.getUid());
+		List<TestPart> currentTest = new ArrayList<TestPart>();
+		List<TestPart> completedTest = new ArrayList<TestPart>();
+		Iterator<Test> itr = tests.iterator();
+		while(itr.hasNext()) {
+			Test temp = itr.next();
+			if(temp.getState().equals("start")) {
+				liveTest.add(temp); 
+			}
+		}
+		int i,j;
+		for(i = 0 ; i < liveTest.size() ; i++) {
+			int flag = 0;
+			for(j = 0 ; j < participations.size() ; j++) {
+				if(liveTest.get(i).getTid() == participations.get(j).getPk().getTid()) {
+					flag = 1;
+					if(participations.get(j).getLast_attempted() == participations.get(j).getTotalQn()) {
+						// completed
+						Test t = liveTest.get(i);
+						Participation p = participations.get(j);
+						TestPart tp = new TestPart(t,p);
+						completedTest.add(tp);
+					}else {
+						// not completed
+						Test t = liveTest.get(i);
+						Participation p = participations.get(j);
+						TestPart tp = new TestPart(t,p);
+						currentTest.add(tp);
+					}
+				}
+			}
+			if(flag == 0) {
+				Test t = liveTest.get(i);
+				Participation p = new Participation();
+				TestPart tp = new TestPart(t,p);
+				
+				currentTest.add(tp);
+			}
+		}
+		itr =tests.iterator();
+		while(itr.hasNext()) {
+			Test temp = itr.next();
+			if(temp.getState().equals("end")) {
+				endTest.add(temp); 
+			}
+		}
+		for(i = 0 ; i < endTest.size() ; i++) {
+			int flag = 0;
+			for(j = 0 ; j < participations.size() ; j++) {
+				if(endTest.get(i).getTid() == participations.get(j).getPk().getTid()) {
+					flag = 1;
+					if(participations.get(j).getLast_attempted() == participations.get(j).getTotalQn()) {
+						Test t = endTest.get(i);
+						Participation p = participations.get(j);
+						TestPart tp = new TestPart(t,p);
+						completedTest.add(tp);
+					}
+				}
+			}
+		}
+		mandv.addObject("completedTest", completedTest);
+		mandv.setViewName("StudentHistory");
+		return mandv;
+	}
 	
 	@RequestMapping(value="/test/{tid}/start",method = RequestMethod.GET)
 	public String start(@PathVariable int tid, Principal principal) {
@@ -381,7 +451,7 @@ public class UserController {
         mail.setMailSubject("Vspace - Your Submission");
         mail.setMailContent("Attached the PDF wherein you can find your submissions");
         mailService.sendEmail(mail,reports);
-		return "redirect:/user/dashboard";
+		return "redirect:/user/history";
 		
 		
 	}

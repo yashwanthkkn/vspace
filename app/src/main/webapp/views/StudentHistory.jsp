@@ -11,77 +11,41 @@
                 <div class="h5 text-b">My Test</div>
             </div>
             <div class="col-12">
-                <p>List of all my tests</p>
+                <p>List of all my completed tests</p>
             </div>
         </div>
 
         <div class="row mt-3 px-5">
             <div class="col-12">
                 <div class="d-flex justify-content-between">
-                    <div class="h5 text-b">Current Test</div>
+                    <div class="h5 text-b">Completed Test</div>
                 </div>
             </div>
         </div>
 
         <div class="row px-5">
 
-          <c:forEach items="${currentTest}" var="test">
+          <c:forEach items="${completedTest}" var="test">
             <div class="col-4 mt-4">
               <div class="shadow">
                 <div class="card-header text-img text-d" style="height: 120px;">
-                    <h4>${test.test.tname}</h4>
+                    <a href="/user/studentresult/${test.test.tid}/${test.participation.pk.uid}" class="decor-none">
+                        <h4>${test.test.tname}</h4>
+                      </a>
                 </div>
                 <div class="px-3 py-2">
                   <div class="d-flex justify-content-between">
                     <div>
                         <small>Date : <strong>${test.test.date}</strong></small>
                     </div>
-                    <div>
-                      <c:if test="${test.test.needPayment == 'true'}">
-                        <span class="badge rounded-pill bg-y">Rs ${test.test.amount}</span>
-                      </c:if>
-                    </div>
                   </div>
                   <div class="mt-1">
-                    <small>Start Time : ${test.test.start_time}</small>
+                    <small>Total Marks : ${test.test.totalMarks}</small>
                   </div>
                   <div class="mt-1">
-                      <small>Duration : ${test.test.duration} hr</small>
+                      <small>Marks Scored : ${test.participation.score} </small>
                   </div>
-                  <div class="mt-2 d-flex justify-content-between">
-                      <small>Total Marks : ${test.test.totalMarks}</small>
-                      <c:if test="${test.test.needPayment == 'false'}">
-                        <c:if test="${test.participation.last_attempted == 0 }">
-                          <a href="/user/test/${test.test.tid}/s">
-                            <button class="btn btn-sm bg-b text-white"><i class="fas fa-play"></i> Start Test</button>
-                          </a>
-                        </c:if>
-                        <c:if test="${test.participation.last_attempted != 0 }">
-                          <a href="/user/test/${test.test.tid}/qn">
-                            <button class="btn btn-sm bg-b text-white"><i class="fab fa-rev"></i> Resume Test</button>
-                          </a>
-                        </c:if>
-                      </c:if>
-                      <c:if test="${test.test.needPayment == 'true'}">
-                        <c:if test="${test.participation.paymentDone == 'false'}">
-                          <a href="/user/test/${test.test.tid}/payment">
-                            <button class="btn btn-sm bg-y text-white">Pay Rs ${test.test.amount}</button>
-                          </a>
-                        </c:if>
-                        <c:if test="${test.participation.paymentDone == 'true'}">
-                          <c:if test="${test.participation.last_attempted == 0 }">
-                            <a href="/user/test/${test.test.tid}/s">
-                              <button class="btn btn-sm bg-b text-white"><i class="fas fa-play"></i> Start Test</button>
-                            </a>
-                          </c:if>
-                          <c:if test="${test.participation.last_attempted != 0 }">
-                            <a href="/user/test/${test.test.tid}/qn">
-                              <button class="btn btn-sm bg-b text-white"><i class="fab fa-rev"></i> Resume Test</button>
-                            </a>
-                          </c:if>
-                        </c:if>
-                      </c:if>
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -145,9 +109,9 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> -->
 
-        <div class="row mt-5 px-5">
+     <!--  <div class="row mt-5 px-5">
             <div class="col-12">
                 <div class="h5 text-b">Completed</div>
             </div>
@@ -181,6 +145,6 @@
                 </table>
             </div>
         </div>
-    </div> -->
+    </div>--> 
 
 <jsp:include page="Footer.jsp" />
