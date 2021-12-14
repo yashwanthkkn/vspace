@@ -378,8 +378,8 @@ public class UserController {
 		Mail mail = new Mail();
         mail.setMailFrom("sriyazhinidevi12@gmail.com");
         mail.setMailTo(principal.getName());
-        mail.setMailSubject("Spring Boot - Email Example");
-        mail.setMailContent("Learn How to send Email using Spring Boot!!!\n\nThanks\nwww.technicalkeeda.com");
+        mail.setMailSubject("Vspace - Your Submission");
+        mail.setMailContent("Attached the PDF wherein you can find your submissions");
         mailService.sendEmail(mail,reports);
 		return "redirect:/user/dashboard";
 		
