@@ -10,26 +10,31 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light  px-5">
-          <div class="container-fluid">
-              <a class="navbar-brand" href="#">
-                  <!-- <img src="" alt="" width="30" height="24" class="d-inline-block align-text-top"> -->
-                  Vspace
-                </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-              </ul>
-              <button class="btn btn-outline-primary btn-sm" type="submit">Logout</button>
-              
-            </div>
-          </div>
-      </nav>
+  <nav class="navbar navbar-expand-lg navbar-dark text-l bg-b  px-5">
+    <div class="container-fluid">
+      <a class="navbar-brand " href="#">
+        <i class="fab fa-pied-piper-alt px-1"></i> Vspace
+    </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <span class="px-4"></span>
+        <form class="d-flex px-5 w-100">
+          <input class="form-control me-2" type="search" placeholder="Search Tests" aria-label="Search">
+          <button class="btn bg-b text-white btn-sm"  type="submit"><i class="fas fa-search"></i></button>
+        </form>
+        <div class="me-auto"></div>
+        <ul class="navbar-nav mb-2 mb-lg-0 px-4">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+          </li>
+        </ul>
+        <button class="btn btn-outline-light btn-sm" type="submit">Logout</button>
+        
+      </div>
+    </div>
+</nav>
     <div class="container-fluid">
 
         <div class="row mt-4 px-5">
@@ -49,6 +54,39 @@
             </div>
         </div>
 
+        <div class="row px-5">
+          <div class="col-4 mt-3">
+            <div class=" shadow">
+             <div class="card-header text-img text-d" style="height: 120px;">
+              <a href="adminQuestion.html" class="decor-none">
+                <h4>Kec-2022</h4>
+              </a>
+             </div>
+             <div class="px-3 py-2">
+               <div class="d-flex justify-content-between">
+                 <div>
+                    <small>Date : <strong>12/12/12</strong></small>
+                 </div>
+                 <div>
+                  <span class="badge rounded-pill bg-r">live</span>
+                  <span class="badge rounded-pill bg-y">Rs 100</span>
+                 </div>
+                </div>
+                <div class="mt-1">
+                 <small>Start Time : 12.00 am</small>
+                </div>
+                <div class="mt-1">
+                  <small>Duration : 1 hr</small>
+                </div>
+                <div class="mt-2 d-flex justify-content-between">
+                  <small>Total Marks : 60</small>
+                  <button class="btn btn-sm bg-b text-white">Start Test</button>
+                </div>
+             </div>
+            </div>
+      
+        </div>
+<!-- 
         <div class="row px-5">
             <div class="col-12">
                 <table class="table  table-striped">
@@ -80,7 +118,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> -->
 
         <div class="row mt-5 px-5">
             <div class="col-12">

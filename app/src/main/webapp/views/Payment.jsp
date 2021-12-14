@@ -3,58 +3,35 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="Header.jsp" />
-      <nav class="navbar navbar-expand-lg navbar-light bg-light  px-5">
-          <div class="container-fluid">
-            <a class="navbar-brand text-primary" href="#">
-              <i class="fab fa-pied-piper-alt"></i> Vspace
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-              </ul>
-              <a href="/logout">
-                <button class="btn btn-outline-primary btn-sm" type="submit">Logout</button>
-              </a>
-            </div>
-          </div>
-      </nav>
     <div class="container-fluid">
 
         <div class="row mt-4 px-5">
             <div class="col-12">
-                <div class="h5">Payment</div>
+                <div class="h5 text-b">Payment</div>
             </div>
         </div>
 
-        <div class="row mt-3 px-5">
-            <div class="col-12">
-                <div class="d-flex justify-content-between">
-                    <div class="h5">Test Details : ${test.tname}</div>
+        <div class="row mt-5 px-5">
+            <div class="col-7">
+                <div class="text-b h5">Test Details</div>
+                <div class="row mt-3">
+                    <div class="col-3">Name</div>
+                    <div class="col-3">Date</div>
+                    <div class="col-3">Duration</div>
+                    <div class="col-3">Total Marks</div>
+                </div>
+                <div class="row mt-3 text-b">
+                    <div class="col-3">${test.tname}</div>
+                    <div class="col-3">${test.start_time}</div>
+                    <div class="col-3">${test.duration}</div>
+                    <div class="col-3">${test.totalMarks}</div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-2 px-5">
-            <div class="col-12">
-                <div class="d-flex justify-content-around">
-                    <div class="card" style="width: 30rem;">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Test Name  : ${test.tname}</li>
-                            <li class="list-group-item">Test Date  : ${test.date}</li>
-                            <li class="list-group-item">Start Time : ${test.start_time}</li>
-                            <li class="list-group-item">Duration   : ${test.duration} hr</li>
-                            <li class="list-group-item">Total Marks: ${test.totalMarks}</li>
-    
-                        </ul>
-                        <div class="card-footer">
-                            <div class="text-end">
-                                <button id="rzp-button" class="btn btn-danger text-white" url="${test.tid}">Pay <i class="fas fa-rupee-sign"></i> ${test.amount}</button>
-                            </div>
-                        </div>
+            <div class="col-5">
+                <div class="px-2 py-4 shadow text-center rounded">
+                    Note : You can attempt this test only one time
+                    <div class="mt-3 d-grid">
+                        <button id="rzp-button" class="btn btn-block bg-y text-white">Pay Rs ${test.amount}</button>
                     </div>
                 </div>
             </div>

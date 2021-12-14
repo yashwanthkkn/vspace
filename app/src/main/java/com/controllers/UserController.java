@@ -207,11 +207,12 @@ public class UserController {
 		if(participation == null || participation.getLast_attempted() == participation.getTotalQn()) {
 			return new ModelAndView("redirect:/user/dashboard");
 		}
-		System.out.println(participation);
+		
 		Question question = questionService.findQuestionByTidAndIdx(tid, participation.getLast_attempted()+1);
 		List<Answer> options = answerService.findAllAnswerByQid(question.getQid());
 		
 		mandv.addObject("question",question);
+		mandv.addObject("participation",participation);
 		mandv.addObject("options",options);
 		mandv.addObject("tid",tid);
 		mandv.addObject("opt",new Answer());
@@ -304,4 +305,12 @@ public class UserController {
 				.body(new InputStreamResource(bis));
 	}
 	
+	@RequestMapping(value = "/test/{tid}/s",method = RequestMethod.GET)
+	public ModelAndView startTestUi(ModelAndView mandv,@PathVariable int tid) {
+		Test test = testService.findById(tid);
+		
+		mandv.addObject("test",test);
+		mandv.setViewName("StartTest");
+		return mandv;
+	}
 }

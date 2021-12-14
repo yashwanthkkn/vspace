@@ -2,44 +2,23 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="Header.jsp" />
-    <nav class="navbar navbar-expand-lg navbar-light bg-light  px-5">
-        <div class="container-fluid">
-            <a class="navbar-brand text-primary" href="#">
-                <i class="fab fa-pied-piper-alt"></i> Vspace
-            </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-            </ul>
-            <a href="/logout">
-              <button class="btn btn-outline-primary btn-sm" type="submit">Logout</button>
-            </a>
-          </div>
-        </div>
-    </nav>
+<jsp:include page="AdminHeader.jsp" />
+
     <div class="container-fluid">
 
         <div class="row mt-4 px-5">
-            <div class="col-12">
-                <div class="h5">My Test</div>
-            </div>
-            <div class="col-12">
-                <p>List of all my tests</p>
-            </div>
+          <div class="col-12">
+              <div class="h5 text-b">My Test</div>
+              <small class="text-secondary">List of all my tests</small>
+          </div>
         </div>
 
         <div class="row mt-3 px-5">
             <div class="col-12">
                 <div class="d-flex justify-content-between">
-                    <div class="h5">Current Test</div>
+                    <div class="h5 text-b">Current Test</div>
                     <div>
-                      <button class="btn btn-primary btn-sm" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                      <button class="btn bg-r text-white btn-sm" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                         <i class="fas fa-plus"></i> Create Test
                       </button>
                     </div>
@@ -48,52 +27,53 @@
         </div>
 
         <div class="row px-5">
-            <div class="col-12">
-                <table class="table  table-striped">
-                    <thead>
-                      <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Start Time</th>
-                        <th scope="col">Duration</th>
-                        <th scope="col">Questions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <c:forEach items="${tests}" var="test">
-                        <c:if test="${test.state == 'start' || test.state == 'edit'}">
-                      <tr>
-                        <td scope="row">
-                          <a href="/admin/test/${test.tid}">${test.tname}</a>
-                          <c:if test="${test.state == 'start'}">
-                            <span class="badge rounded-pill bg-success">live</span>
-                          </c:if>
-                          <c:if test="${test.needPayment == 'true'}">
-                            <span class="badge rounded-pill bg-primary">Rs ${test.amount}</span>
-                          </c:if>
-                        </td>
-                        <td>${test.date}</td>
-                        <td>${test.start_time}</td>
-                        <td>${test.duration}</td>
-                        <td>30</td>
-                      </tr>
-                    </c:if>
-                    </c:forEach>
-                     
-                    </tbody>
-                </table>
-            </div>
+
+          <c:forEach items="${tests}" var="test">
+            <c:if test="${test.state == 'start' || test.state == 'edit'}">
+              <div class="col-4 mt-4">
+                <div class="shadow">
+                  <div class="card-header text-img text-d" style="height: 120px;">
+                   <a href="/admin/test/${test.tid}" class="decor-none">
+                     <h4>${test.tname}</h4>
+                   </a>
+                  </div>
+                  <div class="px-3 py-2">
+                    <div class="d-flex justify-content-between">
+                      <div>
+                         <small>Date : <strong>${test.date}</strong></small>
+                      </div>
+                      <div>
+                        <c:if test="${test.state == 'start'}">
+                          <span class="badge rounded-pill bg-r">live</span>
+                        </c:if>
+                        <c:if test="${test.needPayment == 'true'}">
+                          <span class="badge rounded-pill bg-y">Rs ${test.amount}</span>
+                        </c:if>
+                      </div>
+                    </div>
+                    <div class="mt-1">
+                      <small>Start Time : ${test.start_time}</small>
+                    </div>
+                    <div class="mt-1">
+                       <small>Duration : ${test.duration} hr</small>
+                    </div>
+                    <div class="mt-1">
+                       <small>Total Marks : <c:if test="${test.state == 'start'}">${test.totalMarks}</c:if>
+                        <c:if test="${test.state != 'start'}">-</c:if>
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </c:if>
+          </c:forEach>
+          
         </div>
 
         <div class="row mt-5 px-5">
             <div class="col-12">
               <div class="d-flex justify-content-between">
-                <div class="h5">Completed</div>
-                <div>
-                  <a href="/admin/excelExport" class="btn btn-success">Export data into Excel 
-                    <i class="fa fa-file-excel-o" aria-hidden="true"></i></a> 
-                  </button>
-                </div>
+                <div class="h5 text-b">Completed</div>
             </div>
           </div>
         </div>
@@ -111,19 +91,21 @@
                       </tr>
                     </thead>
                     <tbody>
+
                       <c:forEach items="${completedtests}" var="test">
                         <c:if test="${test.state == 'end'}">
-                      <tr>
-                        <td scope="row">
-                          <a href="/admin/result/${test.tid}">${test.tname}</a>
-                        </td>
-                        <td>${test.date}</td>
-                        <td>${test.start_time}</td>
-                        <td>${test.duration}</td>
-                        <td>30</td>
-                      </tr>
-                    </c:if>
+                          <tr>
+                            <td scope="row">
+                              <a href="/admin/result/${test.tid}">${test.tname}</a>
+                            </td>
+                            <td>${test.date}</td>
+                            <td>${test.start_time}</td>
+                            <td>${test.duration}</td>
+                            <td>30</td>
+                          </tr>
+                        </c:if>
                      </c:forEach>
+
                     </tbody>
                 </table>
             </div>
@@ -133,33 +115,33 @@
     <!-- MODAL -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header">
-          <h5 id="offcanvasRightLabel">Add Test</h5>
+          <h5 id="offcanvasRightLabel text-b">Add Test</h5>
           <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <spring:form name="dashboard" method="POST" action="/admin/dashboard" modelAttribute="test">
-                <div class="mb-1">
+                <div class="mb-3">
                     <label for="testName" class="form-label">Test Name</label>
-                    <spring:input placeholder="Aptitute-Kec" type="text" path="tname" class="form-control form-control-sm" />
+                    <spring:input placeholder="Eg. Aptitude-Kec" type="text" path="tname" class="form-control form-control-sm" />
                 </div>
-                <div class="mb-1">
+                <div class="mb-3">
                     <label for="date" class="form-label">Date</label>
                     <spring:input type="date" path="date" class="form-control form-control-sm" id="date" />
                 </div>
-                <div class="mb-1">
+                <div class="mb-3">
                     <label for="time" class="form-label">Start Time</label>
                     <spring:input type="time" path="start_time" class="form-control form-control-sm" id="time" />
                 </div>
                 <div class="mb-3">
-                    <label for="duration" class="form-label">Duration </label>
+                    <label for="duration" class="form-label">Duration (Eg. 1.30) </label>
                     <spring:input type='text' placeholder="eg. 1 hr" path="duration" class="form-control form-control-sm" id="duration" />
                 </div>
                 <div class="mb-3">
                   <label for="duration" class="form-label">Payment (in Rs)</label>
-                  <spring:input type='text' placeholder="eg. 1 hr" path="amount" class="form-control form-control-sm" id="duration" />
+                  <spring:input type='text' path="amount" class="form-control form-control-sm" id="duration" />
                   <small class="mt-1 text-secondary">Leave empty if you don't want have any fee to take this test</small>
                 </div>
-                <button type="submit" class="btn btn-primary btn-sm px-5">Create Test</button>
+                <button type="submit" class="btn bg-b text-white btn-sm px-5">Create Test</button>
               </spring:form>
         </div>
       </div>
