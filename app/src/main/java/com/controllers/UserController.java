@@ -288,14 +288,27 @@ public class UserController {
 
 	@RequestMapping(value = "/exportpdf/{tid}/{uid}",produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> employeeReports(HttpServletResponse response,@PathVariable int tid,@PathVariable int uid) throws IOException {
-		ReportHelper reportHelper=new ReportHelper();
-		List<Report> report = reportHelper.getReport(tid,uid);
-		Iterator<Report> itr=report.iterator();
+		//ReportHelper reportHelper=new ReportHelper();
+		//List<Report> report = reportHelper.getReport(tid,uid);
+	/*	Iterator<Report> itr=report.iterator();
 		while(itr.hasNext()) {
 			System.out.println(itr.next());
+		}*/
+		SubmissionPk sk=new SubmissionPk();
+		List<Report> reports=new ArrayList<Report>();
+		List<Question> questions=questionService.findQuestionsByTid(tid);
+		Iterator<Question> itr=questions.iterator();
+		while(itr.hasNext()) {
+			Question temp=itr.next();
+			sk.setTid(tid);
+			sk.setUid(uid);
+			sk.setQid(temp.getQid());
+			Submission sub=submissionService.findById(sk);
+			Report report=new Report(sub,temp);
+			reports.add(report);
 		}
-	/*	List<Question> report=questionService.findQuestionsByTid(tid);*/
-		ByteArrayInputStream bis = ExportPdf.reportsReport(report);
+		//List<Question> report=questionService.findQuestionsByTid(tid);
+		ByteArrayInputStream bis = ExportPdf.reportsReport(reports);
 
 		HttpHeaders headers = new HttpHeaders();
 
