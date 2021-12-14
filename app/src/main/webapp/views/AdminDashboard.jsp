@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="AdminHeader.jsp" />
 
-    <div class="container-fluid">
+    <div class="container-fluid mb-5">
 
         <div class="row mt-4 px-5">
           <div class="col-12">

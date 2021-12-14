@@ -30,10 +30,7 @@
                 <a class="nav-link active" aria-current="page" href="/admin/dashboard">Dashboard</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/admin/history">History</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">Users</a>
+                <a class="nav-link active" aria-current="page" href="/admin/history">Completed</a>
               </li>
             </ul>
             <a href="/logout">

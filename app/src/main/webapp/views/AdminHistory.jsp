@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="AdminHeader.jsp" />
 
-    <div class="container-fluid">
+    <div class="container-fluid mb-5">
 
         <div class="row mt-4 px-5">
           <div class="col-12">
@@ -34,6 +34,9 @@
                       <div>
                          <small>Date : <strong>${test.date}</strong></small>
                       </div>
+                      <div>
+                         <small>Total Marks : ${test.totalMarks}</small>
+                      </div>
                       
                     </div>
                     <div class="mt-1">
@@ -41,10 +44,6 @@
                     </div>
                     <div class="mt-1">
                        <small>Duration : ${test.duration} hr</small>
-                    </div>
-                    <div class="mt-1">
-                       <small>Total Marks : ${test.totalMarks}
-                      </small>
                     </div>
                   </div>
                 </div>
