@@ -130,31 +130,21 @@ public class UserController {
 				}
 			}
 		}
-//		System.out.println("Current test");
-//		Iterator<TestPart> itr1 = currentTest.iterator();
-//		while(itr.hasNext()) {
-//			System.out.println(itr.next());
-//		}
-//		System.out.println("Completed test");
-//		itr1 = completedTest.iterator();
-//		while(itr1.hasNext()) {
-//			TestPart t = itr1.next();
-//		}
+
 		mandv.addObject("tests",tests);
 		mandv.addObject("user",user);
 		mandv.addObject("currentTest",currentTest);
 		mandv.addObject("completedTest",completedTest);
 		mandv.setViewName("StudentDashboard");
-//		mandv.setViewName("LAlalal");
 		return mandv;
 	}
 	
-	@RequestMapping(value="/test",method = RequestMethod.GET)
-	public String testPage() {
-		return "TestPage";
-	}
+	
 	@RequestMapping(value = "/history",method = RequestMethod.GET)
 	public ModelAndView History(ModelAndView mandv,Principal principal) {
+		if(principal == null) {
+			return new ModelAndView("redirect:/login");
+		}
 		User user = userService.findUserByEmailid(principal.getName());
 		List<Test> tests = testService.findAllTests();
 		List<Test> liveTest = new ArrayList<Test>();
@@ -348,7 +338,10 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/test/{tid}/payment",method = RequestMethod.GET)
-	public ModelAndView payment(ModelAndView mandv,@PathVariable int tid) {
+	public ModelAndView payment(ModelAndView mandv,@PathVariable int tid,Principal principal) {
+		if(principal == null) {
+			return new ModelAndView("redirect:/login");
+		}
 		Test test = testService.findById(tid);
 		if(!test.isNeedPayment()) {
 			return new ModelAndView("redirect:/user/dashboard");
@@ -361,12 +354,7 @@ public class UserController {
 
 	@RequestMapping(value = "/exportpdf/{tid}/{uid}",produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> employeeReports(HttpServletResponse response,@PathVariable int tid,@PathVariable int uid) throws IOException {
-		//ReportHelper reportHelper=new ReportHelper();
-		//List<Report> report = reportHelper.getReport(tid,uid);
-	/*	Iterator<Report> itr=report.iterator();
-		while(itr.hasNext()) {
-			System.out.println(itr.next());
-		}*/
+		
 		SubmissionPk sk=new SubmissionPk();
 		List<Report> reports=new ArrayList<Report>();
 		List<Question> questions=questionService.findQuestionsByTid(tid);
@@ -380,7 +368,7 @@ public class UserController {
 			Report report=new Report(sub,temp);
 			reports.add(report);
 		}
-		//List<Question> report=questionService.findQuestionsByTid(tid);
+
 		ByteArrayInputStream bis = ExportPdf.reportsReport(reports);
 
 		HttpHeaders headers = new HttpHeaders();
@@ -430,6 +418,9 @@ public class UserController {
 	@RequestMapping(value = "/sendMail/{tid}/{uid}")
 	public String submissionEmail(HttpServletResponse response,@PathVariable int tid,@PathVariable int uid, Principal principal) throws IOException {
 
+		if(principal == null) {
+			return "redirect:/login";
+		}
 		SubmissionPk sk=new SubmissionPk();
 		List<Report> reports=new ArrayList<Report>();
 		List<Question> questions=questionService.findQuestionsByTid(tid);
