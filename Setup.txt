@@ -1,0 +1,31 @@
+* Start Up
+
+-> Download the repo
+-> Open the app folder on the Spring suite IDE
+-> Run the app ( com.main.AppApplication.java)
+-> Open Browser and go to localhost:8080
+
+
+* DB set up
+
+-> Create a new database under the name "vspace" or import the database from /db/vspace.sql (recommended)
+-> If you created a new database, make sure to change the "claim" of One user to "admin" to access admin interface
+
+
+* Navigation through the Admin Interface
+
+-> You will be redirected to a login page
+-> Login using the admin credentials, username: admin@gmail.com , password:admin
+-> You can see the list of Tests.Click on the test name view questions . You can create new Test as well
+-> If the test status is not live, You can add questions the questions
+-> On the History tab, You can see the results of pervious tests and download the results as well.
+
+
+* Navigation through User Interface
+
+-> If you are a new user, Sign up and login with that credentials 
+-> You will be redirected to user dashboard
+-> You will see the list of all live tests and competed test
+-> You can start test right away. If the test requires payment , then you have to make payment and start the test.
+-> On the test page , you will have questions and option and also a naviagtion bar on the side for reference
+-> Once you complete all the questions the test will be auto submitted and you can view your submissions on submission tab.
