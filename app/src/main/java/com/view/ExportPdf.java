@@ -4,12 +4,15 @@ import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 import com.entities.Question;
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.CMYKColor;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -21,6 +24,7 @@ public class ExportPdf {
 
 		Document document = new Document();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		Font blueFont = FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD, new CMYKColor(255, 0, 0, 0));
 
 		try {
 
@@ -35,22 +39,27 @@ public class ExportPdf {
 
 			hcell = new PdfPCell(new Phrase("QUESTION", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			hcell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 			table.addCell(hcell);
 
 			hcell = new PdfPCell(new Phrase("CORRECT ANSWER", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			hcell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 			table.addCell(hcell);
 			
 			hcell = new PdfPCell(new Phrase("YOUR CHOICE", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			hcell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 			table.addCell(hcell);
 			
 			hcell = new PdfPCell(new Phrase("STATUS", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			hcell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 			table.addCell(hcell);
 			
 			hcell = new PdfPCell(new Phrase("MARK", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			hcell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 			table.addCell(hcell);
 			int i=1;
 			for (Report report : reports) {
@@ -91,8 +100,12 @@ public class ExportPdf {
 
 			PdfWriter.getInstance(document, out);
 			document.open();
+			Paragraph para=new Paragraph("SUBMISSION",blueFont);
+			para.setSpacingAfter(50);
+			//document.add(new Paragraph("Submission",blueFont));
+			document.add(para);
 			document.add(table);
-
+			
 			document.close();
 
 		} catch (DocumentException ex) {
@@ -106,6 +119,7 @@ public class ExportPdf {
 
 		Document document = new Document();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		Font blueFont = FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD, new CMYKColor(255, 0, 0, 0));
 
 		try {
 
@@ -119,22 +133,27 @@ public class ExportPdf {
 
 			hcell = new PdfPCell(new Phrase("QUESTION", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			hcell.setBackgroundColor(BaseColor.GRAY);
 			table.addCell(hcell);
 
 			hcell = new PdfPCell(new Phrase("CORRECT ANSWER", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			hcell.setBackgroundColor(BaseColor.GRAY);
 			table.addCell(hcell);
 			
 			hcell = new PdfPCell(new Phrase("YOUR CHOICE", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			hcell.setBackgroundColor(BaseColor.GRAY);
 			table.addCell(hcell);
 			
 			hcell = new PdfPCell(new Phrase("STATUS", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			hcell.setBackgroundColor(BaseColor.GRAY);
 			table.addCell(hcell);
 			
 			hcell = new PdfPCell(new Phrase("MARK", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			hcell.setBackgroundColor(BaseColor.GRAY);
 			table.addCell(hcell);
 			int i=1;
 			for (Report report : reports) {
@@ -175,6 +194,9 @@ public class ExportPdf {
 
 			PdfWriter.getInstance(document, out);
 			document.open();
+			Paragraph para=new Paragraph("SUBMISSION",blueFont);
+			para.setSpacingAfter(50);
+			document.add(para);
 			document.add(table);
 
 			document.close();

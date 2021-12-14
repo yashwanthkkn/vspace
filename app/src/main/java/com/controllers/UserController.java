@@ -330,6 +330,33 @@ public class UserController {
 		return mandv;
 	}
 	
+	@RequestMapping(value = "/studentresult/{tid}/{uid}")
+	public ModelAndView StudentResultPage(ModelAndView mandv,@PathVariable int tid,@PathVariable int uid)
+	{
+		Test test=testService.findById(tid);
+		String tname=test.getTname();
+		SubmissionPk sk=new SubmissionPk();
+		List<Report> reports=new ArrayList<Report>();
+		List<Question> questions=questionService.findQuestionsByTid(tid);
+		Iterator<Question> itr=questions.iterator();
+		while(itr.hasNext()) {
+			Question temp=itr.next();
+			sk.setTid(tid);
+			sk.setUid(uid);
+			sk.setQid(temp.getQid());
+			Submission sub=submissionService.findById(sk);
+			Report report=new Report(sub,temp);
+			reports.add(report);
+		}
+		mandv.addObject("reports",reports);
+		mandv.addObject("tid",tid);
+		mandv.addObject("uid",uid);
+		mandv.addObject("tname",tname);
+		mandv.setViewName("StudentResult");
+		return mandv;
+		
+	}
+	
 	@RequestMapping(value = "/sendMail/{tid}/{uid}")
 	public String submissionEmail(HttpServletResponse response,@PathVariable int tid,@PathVariable int uid, Principal principal) throws IOException {
 
