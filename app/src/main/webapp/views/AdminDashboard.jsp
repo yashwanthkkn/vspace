@@ -27,9 +27,18 @@
         </div>
 
         <div class="row px-5">
-
+          <c:if test="${tests.size() == 0 }">
+            <div class="text-center text-secondary mt-5">
+              You don't have any tests yet.
+            </div>
+            <div class="text-center text-secondary mt-3">
+              <button class="btn bg-r text-white btn-sm" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                <i class="fas fa-plus"></i> Create Test
+              </button>
+            </div>
+          </c:if>
+          <c:if test="${tests.size() > 0 }">
           <c:forEach items="${tests}" var="test">
-            <c:if test="${test.state == 'start' || test.state == 'edit'}">
               <div class="col-4 mt-4">
                 <div class="shadow">
                   <div class="card-header text-img text-d" style="height: 120px;">
@@ -65,8 +74,8 @@
                   </div>
                 </div>
               </div>
-            </c:if>
-          </c:forEach>
+            </c:forEach>
+          </c:if>
           
         </div>
 

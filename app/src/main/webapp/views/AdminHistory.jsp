@@ -20,35 +20,41 @@
         </div>
 
         <div class="row px-5">
-
-          <c:forEach items="${completedtests}" var="test">
-              <div class="col-4 mt-4">
-                <div class="shadow">
-                  <div class="card-header text-img text-d" style="height: 120px;">
-                   <a href="/admin/result/${test.tid}" class="decor-none">
-                     <h4>${test.tname}</h4>
-                   </a>
-                  </div>
-                  <div class="px-3 py-2">
-                    <div class="d-flex justify-content-between">
-                      <div>
-                         <small>Date : <strong>${test.date}</strong></small>
-                      </div>
-                      <div>
-                         <small>Total Marks : ${test.totalMarks}</small>
-                      </div>
-                      
+          <c:if test="${completedtests.size() == 0 }">
+            <div class="text-center text-secondary mt-5">
+              You don't have any tests yet.
+            </div>
+          </c:if>
+          <c:if test="${completedtests.size() > 0 }">
+            <c:forEach items="${completedtests}" var="test">
+                <div class="col-4 mt-4">
+                  <div class="shadow">
+                    <div class="card-header text-img text-d" style="height: 120px;">
+                     <a href="/admin/result/${test.tid}" class="decor-none">
+                       <h4>${test.tname}</h4>
+                     </a>
                     </div>
-                    <div class="mt-1">
-                      <small>Start Time : ${test.start_time}</small>
-                    </div>
-                    <div class="mt-1">
-                       <small>Duration : ${test.duration} hr</small>
+                    <div class="px-3 py-2">
+                      <div class="d-flex justify-content-between">
+                        <div>
+                           <small>Date : <strong>${test.date}</strong></small>
+                        </div>
+                        <div>
+                           <small>Total Marks : ${test.totalMarks}</small>
+                        </div>
+                        
+                      </div>
+                      <div class="mt-1">
+                        <small>Start Time : ${test.start_time}</small>
+                      </div>
+                      <div class="mt-1">
+                         <small>Duration : ${test.duration} hr</small>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-          </c:forEach>
+            </c:forEach>
+          </c:if>
           
         </div>
 

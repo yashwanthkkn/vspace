@@ -60,16 +60,16 @@ public class AdminController {
 		}
 		
 		List<Test> tests = testService.findAllTests();
-		List<Test> completedTest=new ArrayList<Test>();
+		List<Test> currentTest=new ArrayList<Test>();
 		Iterator<Test> itr = tests.iterator();
 		while(itr.hasNext()) {
 			Test temp = itr.next();
-			if(temp.getState().equals("end")) {
-				completedTest.add(temp); 
+			if(temp.getState().equals("start") || temp.getState().equals("edit") ) {
+				currentTest.add(temp); 
 			}
 		}
-		mandv.addObject("completedtests",completedTest);
-		mandv.addObject("tests", tests);
+//		mandv.addObject("completedtests",completedTest);
+		mandv.addObject("tests", currentTest);
 		mandv.addObject("test",new Test());
 		mandv.setViewName("AdminDashboard");
 		return mandv;

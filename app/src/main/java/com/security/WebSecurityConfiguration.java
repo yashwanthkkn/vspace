@@ -52,23 +52,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-//		http
-//			.csrf()
-//			.disable()
-//			.authorizeRequests()
-//			.antMatchers("/","/signup","/img/*","/styles/*").permitAll()
-//			.antMatchers("/user/**").hasAnyAuthority("user")
-//			.antMatchers("/admin/**").hasAnyAuthority("admin")
-//			.anyRequest().authenticated()
-//			.and()
-//			.formLogin()
-//			.loginPage("/login")
-//			.permitAll();
-		http.csrf()
+		http
+			.csrf()
 			.disable()
 			.authorizeRequests()
-			.antMatchers("**")
-			.permitAll()
+			.antMatchers("/","/signup","/img/*","/styles/*","/payment/**").permitAll()
+			.antMatchers("/user/**").hasAnyAuthority("user")
+			.antMatchers("/admin/**").hasAnyAuthority("admin")
+			.anyRequest().authenticated()
 			.and()
 			.formLogin()
 			.loginPage("/login")
@@ -76,6 +67,19 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 			.permitAll()
 			.and()
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
+		
+//		http.csrf()
+//			.disable()
+//			.authorizeRequests()
+//			.antMatchers("**")
+//			.permitAll()
+//			.and()
+//			.formLogin()
+//			.loginPage("/login")
+//			.successHandler(myAuthenticationSuccessHandler())
+//			.permitAll()
+//			.and()
+//			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
 
 	}
 }
