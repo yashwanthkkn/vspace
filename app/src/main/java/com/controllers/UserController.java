@@ -31,6 +31,7 @@ import com.entities.SubmissionPk;
 import com.entities.Test;
 import com.entities.User;
 import com.service.AnswerService;
+import com.service.MailService;
 import com.service.ParticipationService;
 import com.service.QuestionService;
 import com.service.SubmissionService;
@@ -55,6 +56,8 @@ public class UserController {
 	AnswerService answerService;
 	@Autowired
 	SubmissionService submissionService;
+	@Autowired
+	MailService mailService;
 	
 	
 	@RequestMapping(value="/dashboard", method=RequestMethod.GET)
@@ -325,5 +328,34 @@ public class UserController {
 		mandv.addObject("test",test);
 		mandv.setViewName("StartTest");
 		return mandv;
+	}
+	
+	@RequestMapping(value = "/sendMail/{tid}/{uid}")
+	public String submissionEmail(HttpServletResponse response,@PathVariable int tid,@PathVariable int uid, Principal principal) throws IOException {
+
+		SubmissionPk sk=new SubmissionPk();
+		List<Report> reports=new ArrayList<Report>();
+		List<Question> questions=questionService.findQuestionsByTid(tid);
+		Iterator<Question> itr=questions.iterator();
+		while(itr.hasNext()) {
+			Question temp=itr.next();
+			sk.setTid(tid);
+			sk.setUid(uid);
+			sk.setQid(temp.getQid());
+			Submission sub=submissionService.findById(sk);
+			Report report=new Report(sub,temp);
+			reports.add(report);
+		}
+
+		ByteArrayInputStream bis = ExportPdf.reportsReport(reports);
+		Mail mail = new Mail();
+        mail.setMailFrom("sriyazhinidevi12@gmail.com");
+        mail.setMailTo(principal.getName());
+        mail.setMailSubject("Spring Boot - Email Example");
+        mail.setMailContent("Learn How to send Email using Spring Boot!!!\n\nThanks\nwww.technicalkeeda.com");
+        mailService.sendEmail(mail,reports);
+		return "redirect:/user/dashboard";
+		
+		
 	}
 }

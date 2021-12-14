@@ -19,8 +19,8 @@ public class AppApplication {
 	 
 		
 		ApplicationContext ctx= SpringApplication.run(AppApplication.class, args);
-//		 MailService mailService = (MailService) ctx.getBean("mailService");
-//	        mailService.sendEmail(mail);
+//		MailService mailService = (MailService) ctx.getBean("mailService");
+//	    mailService.sendEmail(mail);
 	}
 
 }
