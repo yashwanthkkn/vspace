@@ -29,3 +29,8 @@
 -> You can start test right away. If the test requires payment , then you have to make payment and start the test.
 -> On the test page , you will have questions and option and also a naviagtion bar on the side for reference
 -> Once you complete all the questions the test will be auto submitted and you can view your submissions on submission tab.
+
+* payment
+
+-> For making payments, use the below test credentials
+-> Mastercard 5267 3181 8797 5449 Random CVV Any future date

@@ -45,7 +45,7 @@
                 </div>
                 <div class="row mt-3 text-b">
                     <div class="col-3">${test.tname}</div>
-                    <div class="col-3">${test.start_time}</div>
+                    <div class="col-3">${test.date}</div>
                     <div class="col-3">${test.duration}</div>
                     <div class="col-3">${test.totalMarks}</div>
                 </div>

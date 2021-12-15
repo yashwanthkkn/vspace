@@ -24,9 +24,9 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="me-auto"></div>
-            <a href="/user/test/${tid}/end">
+            <!-- <a href="/user/test/${tid}/end">
                 <button class="btn btn-outline-light btn-sm" type="submit">End Test</button>
-            </a>
+            </a> -->
           </div>
         </div>
     </nav>

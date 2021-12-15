@@ -24,51 +24,38 @@
         </div>
 
         <div class="row px-5">
-
-          <c:forEach items="${currentTest}" var="test">
-            <div class="col-4 mt-4">
-              <div class="shadow">
-                <div class="card-header text-img text-d" style="height: 120px;">
-                    <h4>${test.test.tname}</h4>
-                </div>
-                <div class="px-3 py-2">
-                  <div class="d-flex justify-content-between">
-                    <div>
-                        <small>Date : <strong>${test.test.date}</strong></small>
+          <c:if test="${currentTest.size() == 0}">
+            <div class="text-center text-secondary mt-5">
+              You don't have any live tests.
+            </div>
+          </c:if>
+          <c:if test="${currentTest.size() > 0}">   
+            <c:forEach items="${currentTest}" var="test">
+              <div class="col-4 mt-4">
+                <div class="shadow">
+                  <div class="card-header text-img text-d" style="height: 120px;">
+                      <h4>${test.test.tname}</h4>
+                  </div>
+                  <div class="px-3 py-2">
+                    <div class="d-flex justify-content-between">
+                      <div>
+                          <small>Date : <strong>${test.test.date}</strong></small>
+                      </div>
+                      <div>
+                        <c:if test="${test.test.needPayment == 'true'}">
+                          <span class="badge rounded-pill bg-y">Rs ${test.test.amount}</span>
+                        </c:if>
+                      </div>
                     </div>
-                    <div>
-                      <c:if test="${test.test.needPayment == 'true'}">
-                        <span class="badge rounded-pill bg-y">Rs ${test.test.amount}</span>
-                      </c:if>
+                    <div class="mt-1">
+                      <small>Start Time : ${test.test.start_time}</small>
                     </div>
-                  </div>
-                  <div class="mt-1">
-                    <small>Start Time : ${test.test.start_time}</small>
-                  </div>
-                  <div class="mt-1">
-                      <small>Duration : ${test.test.duration} hr</small>
-                  </div>
-                  <div class="mt-2 d-flex justify-content-between">
-                      <small>Total Marks : ${test.test.totalMarks}</small>
-                      <c:if test="${test.test.needPayment == 'false'}">
-                        <c:if test="${test.participation.last_attempted == 0 }">
-                          <a href="/user/test/${test.test.tid}/s">
-                            <button class="btn btn-sm bg-b text-white"><i class="fas fa-play"></i> Start Test</button>
-                          </a>
-                        </c:if>
-                        <c:if test="${test.participation.last_attempted != 0 }">
-                          <a href="/user/test/${test.test.tid}/qn">
-                            <button class="btn btn-sm bg-b text-white"><i class="fab fa-rev"></i> Resume Test</button>
-                          </a>
-                        </c:if>
-                      </c:if>
-                      <c:if test="${test.test.needPayment == 'true'}">
-                        <c:if test="${test.participation.paymentDone == 'false'}">
-                          <a href="/user/test/${test.test.tid}/payment">
-                            <button class="btn btn-sm bg-y text-white">Pay Rs ${test.test.amount}</button>
-                          </a>
-                        </c:if>
-                        <c:if test="${test.participation.paymentDone == 'true'}">
+                    <div class="mt-1">
+                        <small>Duration : ${test.test.duration} hr</small>
+                    </div>
+                    <div class="mt-2 d-flex justify-content-between">
+                        <small>Total Marks : ${test.test.totalMarks}</small>
+                        <c:if test="${test.test.needPayment == 'false'}">
                           <c:if test="${test.participation.last_attempted == 0 }">
                             <a href="/user/test/${test.test.tid}/s">
                               <button class="btn btn-sm bg-b text-white"><i class="fas fa-play"></i> Start Test</button>
@@ -80,12 +67,31 @@
                             </a>
                           </c:if>
                         </c:if>
-                      </c:if>
+                        <c:if test="${test.test.needPayment == 'true'}">
+                          <c:if test="${test.participation.paymentDone == 'false'}">
+                            <a href="/user/test/${test.test.tid}/payment">
+                              <button class="btn btn-sm bg-y text-white">Pay Rs ${test.test.amount}</button>
+                            </a>
+                          </c:if>
+                          <c:if test="${test.participation.paymentDone == 'true'}">
+                            <c:if test="${test.participation.last_attempted == 0 }">
+                              <a href="/user/test/${test.test.tid}/s">
+                                <button class="btn btn-sm bg-b text-white"><i class="fas fa-play"></i> Start Test</button>
+                              </a>
+                            </c:if>
+                            <c:if test="${test.participation.last_attempted != 0 }">
+                              <a href="/user/test/${test.test.tid}/qn">
+                                <button class="btn btn-sm bg-b text-white"><i class="fab fa-rev"></i> Resume Test</button>
+                              </a>
+                            </c:if>
+                          </c:if>
+                        </c:if>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </c:forEach>
+            </c:forEach>
+          </c:if>
           
         </div>
 

@@ -24,32 +24,38 @@
         </div>
 
         <div class="row px-5">
-
-          <c:forEach items="${completedTest}" var="test">
-            <div class="col-4 mt-4">
-              <div class="shadow">
-                <div class="card-header text-img text-d" style="height: 120px;">
-                    <a href="/user/studentresult/${test.test.tid}/${test.participation.pk.uid}" class="decor-none">
-                        <h4>${test.test.tname}</h4>
-                      </a>
-                </div>
-                <div class="px-3 py-2">
-                  <div class="d-flex justify-content-between">
-                    <div class="mt-1">
-                      <small>Total Marks : ${test.test.totalMarks}</small>
+          <c:if test="${completedTest.size() == 0}">
+            <div class="text-center text-secondary mt-5">
+              You don't have any completed tests.
+            </div>
+          </c:if>
+          <c:if test="${completedTest.size() > 0}">
+            <c:forEach items="${completedTest}" var="test">
+              <div class="col-4 mt-4">
+                <div class="shadow">
+                  <div class="card-header text-img text-d" style="height: 120px;">
+                      <a href="/user/studentresult/${test.test.tid}/${test.participation.pk.uid}" class="decor-none">
+                          <h4>${test.test.tname}</h4>
+                        </a>
+                  </div>
+                  <div class="px-3 py-2">
+                    <div class="d-flex justify-content-between">
+                      <div class="mt-1">
+                        <small>Total Marks : ${test.test.totalMarks}</small>
+                      </div>
+                      <div class="mt-1">
+                        <small>Marks Scored : <strong>${test.participation.score}</strong></small>
+                      </div>
                     </div>
                     <div class="mt-1">
-                      <small>Marks Scored : <strong>${test.participation.score}</strong></small>
+                        <small>Date : ${test.test.date}</small>
                     </div>
+                    
                   </div>
-                  <div class="mt-1">
-                      <small>Date : ${test.test.date}</small>
-                  </div>
-                  
                 </div>
               </div>
-            </div>
-          </c:forEach>          
+            </c:forEach>          
+          </c:if>
         </div>
       </div>
 <jsp:include page="Footer.jsp" />
