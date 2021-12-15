@@ -20,14 +20,15 @@ Vspace is a online assessment portal which allows users to create Simple Online 
 - Create a new database under the name **"vspace"** 
 - (OR) Import the database from **/db/vspace.sql** (recommended)
      - set env variable path to mysql bin   
-     - mysql -u root -p vspace < file.sql
+     - Open cmd and navigate to folder containing vspace.sql
+     - mysql -u root -p vspace < vspace.sql
 - If you created a new database, make sure to change the **"claim"** of One user to **"admin"** to access admin interface
 
 
 ## Navigation through the Admin Interface
 
 - You will be redirected to a login page
-- Login using the admin credentials
+- Login using the admin credentials (Assuming you imported vspace.sql) 
 - **username : admin@gmail.com**
 - **password : admin**
 - You can see the list of Tests.Click on the test name view questions . You can create new Test as well
