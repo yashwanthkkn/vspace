@@ -18,7 +18,7 @@ Vspace is a online assessment portal which allows users to create Simple Online 
 ## Database Setup
 
 - Create a new database under the name **"vspace"** 
-- (OR) Import the database from **/db/vspace.sql** (recommended)
+- Then download and import the database from **/db/vspace.sql** (recommended)
      - set env variable path to mysql bin   
      - Open cmd and navigate to folder containing vspace.sql
      - mysql -u root -p vspace < vspace.sql
