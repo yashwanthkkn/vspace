@@ -11,7 +11,6 @@ import com.entities.Answer;
 import com.entities.Question;
 
 @Repository("AnswerDAO")
-@Transactional
 public class AnswerDAOImpl extends AbstractDAO<Integer, Answer> implements AnswerDAO{
 
 	@Override

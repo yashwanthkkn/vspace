@@ -1,4 +1,4 @@
-package com.controllers;
+package com.util;
 
 import java.util.Date;
 import java.util.List;

@@ -37,6 +37,7 @@ import com.service.QuestionService;
 import com.service.SubmissionService;
 import com.service.TestService;
 import com.service.UserService;
+import com.util.Mail;
 import com.util.Report;
 import com.util.ReportHelper;
 import com.util.TestPart;
@@ -44,20 +45,27 @@ import com.view.ExportPdf;
 @Controller
 @RequestMapping("user")
 public class UserController {
+	
 	@Autowired
-	TestService testService;
+	private TestService testService;
+	
 	@Autowired
-	UserService userService;
+	private UserService userService;
+	
 	@Autowired
-	ParticipationService participationService;
+	private ParticipationService participationService;
+	
 	@Autowired
-	QuestionService questionService;
+	private QuestionService questionService;
+	
 	@Autowired
-	AnswerService answerService;
+	private AnswerService answerService;
+	
 	@Autowired
-	SubmissionService submissionService;
+	private SubmissionService submissionService;
+	
 	@Autowired
-	MailService mailService;
+	private MailService mailService;
 	
 	
 	@RequestMapping(value="/dashboard", method=RequestMethod.GET)

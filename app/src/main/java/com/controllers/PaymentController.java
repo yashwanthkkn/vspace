@@ -38,17 +38,23 @@ import com.util.RazorPay;
 public class PaymentController {
 	
 	@Autowired
-	PaymentService paymentService;
+	private PaymentService paymentService;
+	
 	@Autowired
-	TestService testService;
+	private TestService testService;
+	
 	@Autowired
-	UserService userService;
+	private UserService userService;
+	
 	@Autowired
-	ParticipationService participationService;
+	private ParticipationService participationService;
+	
 	@Autowired
-	QuestionService questionService;
+	private QuestionService questionService;
+	
 	@Autowired
-	OrderService orderService;
+	private OrderService orderService;
+	
 	private static Gson gson = new Gson();
 	
 	
@@ -67,12 +73,7 @@ public class PaymentController {
 			
 			Order order = paymentService.createRazorPayOrder(String.valueOf(test.getAmount()));
 			RazorPay razorPay = paymentService.getRazorPay((String)order.get("id"), test, user);
-//			com.entities.Order txn = new com.entities.Order();
-//			txn.setAmount(test.getAmount());
-//			txn.setStatus("dispatch");
-//			txn.setTid(tid);
-//			txn.setUid(user.getUid());
-//			orderService.saveOrder(txn);
+
 			return new ResponseEntity<String>(gson.toJson(paymentService.getResponse(razorPay, 200)),
 					HttpStatus.OK);
 		}catch(Exception e) {
@@ -114,7 +115,6 @@ public class PaymentController {
 				participation.setTotalQn(totalQuestions);
 				participation.setPaymentDone(true);
 				
-//				com.entities.Order txn = orderService.findById()
 				participationService.saveParticipation(participation);
 				
 				return "redirect:/user/dashboard";

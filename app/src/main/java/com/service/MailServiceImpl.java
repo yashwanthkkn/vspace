@@ -16,8 +16,8 @@ import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
- 
-import com.controllers.Mail;
+
+import com.util.Mail;
 import com.util.Report;
 import com.view.ExportPdf;
  

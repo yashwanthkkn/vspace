@@ -23,7 +23,12 @@ public class AuthController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	@RequestMapping(value="/",method = RequestMethod.GET)
+	public String redirectToLogin() {
+		return "redirect:/login";
+	}
 
+	
 	@RequestMapping(value="/login",method = RequestMethod.GET)
 	public ModelAndView loadLoginPage(ModelAndView mandv,@RequestParam(required = false) String error) {
 

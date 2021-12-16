@@ -36,19 +36,19 @@ import com.view.ExcelExport;
 public class AdminController {
 	
 	@Autowired
-	TestService testService;
+	private TestService testService;
 	
 	@Autowired
-	QuestionService questionService;
+	private QuestionService questionService;
 	
 	@Autowired
-	SubmissionService submissionService;
+	private SubmissionService submissionService;
 	
 	@Autowired
-	ParticipationService participationService;
+	private ParticipationService participationService;
 	
 	@Autowired
-	UserService userService;
+	private UserService userService;
 
 	
 	@RequestMapping(value="/dashboard",method = RequestMethod.GET)
@@ -68,7 +68,6 @@ public class AdminController {
 				currentTest.add(temp); 
 			}
 		}
-//		mandv.addObject("completedtests",completedTest);
 		mandv.addObject("tests", currentTest);
 		mandv.addObject("test",new Test());
 		mandv.setViewName("AdminDashboard");
