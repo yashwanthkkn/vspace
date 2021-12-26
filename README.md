@@ -4,9 +4,8 @@
 
 Vspace is a online assessment portal which allows users to create Simple Online Assessments(MCQ)
 
-- Create Your Own Tests
-- Add Fee to take a Test
-- View sharable test results
+- **Presentation Video** : https://drive.google.com/file/d/1kkDdM5jB1Wal_sHsPzTr07m0pfcfzFbp/view?usp=sharing
+- **PPT** : https://docs.google.com/presentation/d/1EZsETAfAMqfk5q8Sj_3B7dsnIvdKz-qFPiQS0QFdScY/edit?usp=sharing
 
 ## Getting Started
 
